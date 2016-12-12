@@ -1,5 +1,5 @@
 dj-database-url==0.2.2
-gunicorn==18.0
+gunicorn==19.6.0
 static==1.0.2
 otree-core==0.3.14
 boto==2.38.0
