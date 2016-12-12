@@ -1,0 +1,11 @@
+venv
+*.pyc
+staticfiles
+./db.sqlite3
+.idea
+*~
+*.sqlite3
+_coverage_results/
+data
+.DS_Store
+

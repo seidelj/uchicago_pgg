@@ -1,0 +1,21 @@
+{% extends "global/Base.html" %}
+{% load staticfiles otree_tags %}
+
+{% block title %}
+	ID Information
+{% endblock %}
+
+{% block content %}
+
+<p>The computer has randomly assigned you the following ID number: {{ player.participant.id }}.</p>
+<p>This ID number will identify your decisions in today's experiment.</p>
+
+	{% formfield player.label with label="Please enter your FIRST NAME only.  This will be used in helping us keep track of your payment for today's study.  It will otherwise be kept separate from your data." %}
+
+<p>When you have completed reading the instructions and are ready to begin you may proceed</p>
+
+{% next_button %}
+
+{% endblock %}
+
+

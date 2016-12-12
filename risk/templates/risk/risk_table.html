@@ -1,0 +1,20 @@
+<div id="div-table" class="table-responsive">
+	<table class="table table-bordered table-condensed">
+		<tr>
+			<th>Gamble</th>
+			<th>Heads (50% Probability)</th>
+			<th>Tails (50% Probability) </th>
+		</tr>
+		{% for item in gambles %}
+		{% if results and player.risk_choice == item.name %}
+		<tr class="success">
+		{% else %}
+		<tr>
+		{% endif %}		
+			<td>Gamble {{ item.name }}</td>
+			<td>{{ item.value.0 }} Tokens</td>
+			<td>{{ item.value.1 }} Tokens</td>
+		</tr>
+		{% endfor %}
+	</table>
+</div>

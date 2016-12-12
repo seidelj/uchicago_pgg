@@ -1,0 +1,36 @@
+<div id="div-table" class="table-responsive">
+	<table class="table table-bordered table-condensed">
+		<tr>
+			<th></th>
+			<th class="active" style="text-align:center;" colspan="13">Return rate of G.A.</th>
+		</tr>
+		<tr>
+			<th>Group Members</th>
+			{% for x in table_headers %}
+				<th class="active">{{ x }}</th>
+			{% endfor %}
+		</tr>
+		<tr>
+			<td>{{ player.participant.id }}(You)</td>
+			{% for x in table_headers %}
+				{% if x >= player.get_signal_values.left and x <= player.get_signal_values.right %}
+			<td class="success">{% if x == player.signal %}{{ player.signal }}{% endif %}</td>
+				{% else %}
+			<td> </td>
+				{% endif %}
+			{% endfor %}
+		</tr>
+		{% for p in player.get_others_in_group %}
+		<tr>
+			<td>{{ p.participant.id }}</td>
+			{% for x in table_headers %}
+				{% if x >= p.get_signal_values.left and x <= p.get_signal_values.right %}
+			<td {% if treatment == 3 %}class="success"{% endif %}> {% if x == p.signal and treatment == 3 %}{{ p.signal }}{% endif %}</td>
+				{% else %}
+			<td> </td>
+				{% endif %}
+			{% endfor %}
+		</tr>
+		{% endfor %}
+	</table>
+</div>

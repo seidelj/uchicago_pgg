@@ -1,0 +1,19 @@
+{% extends "global/Base.html" %}
+{% load staticfiles otree_tags %}
+
+
+{% block title %}
+	Practice Round Results
+{% endblock %}
+
+{% block content %}
+  
+{% if treatment == 4 or treatment == 5 %}
+	{% include 'public_goods/result_table_pics.html' %}
+{% else %}
+	{% include 'public_goods/result_table.html' %}
+{% endif %}
+
+    {% next_button %}
+
+{% endblock %}

@@ -1,0 +1,32 @@
+<div class="box effect7">
+	<h4>Reminder on how to Interpret the Above Table</h4>
+{% if practice %}
+
+	{% if treatment == 1 %}
+	<p>The table below reports what is the return rate of the Group Account for this round (the cell highlighted in green).</p> <p>Remember that when the experiment begins, the true return rate of the Group Account and signals will remain fixed for the 8 rounds of 3 out of the 4 periods. In these practice rounds return rates change every round to help you better understand the experiment.</p>
+
+	{% elif treatment == 2 or treatment == 4 %}
+	<p>The table below reports your signal for this round (the number in the middle green cell). The three green cells show you what are the possible values of the true return rate of the Group Account in this round, based on your signal. Remember that once the experiment starts, the true return rate of the Group Account and signals will remain fixed for the 8 rounds of 3 out of the 4 periods.</p><p>In these practice rounds return rates and signals change every round to help you better understand the experiment.</p>
+
+	{% elif treatment == 3 or treatment == 5 %}
+	<p>The table below shows what is your signal for this round (the number in the middle green cell in the row corresponding to your ID).Your three green cells show you what are the possible values of the true return rate of the Group Account in this round, based on your signal. The table also shows you the signals of the other group members. The three green cells for their signals show you what are the possible values of the  true return rate of the Group Account, based on their signals. Remember that once the experiment begins, the true return rate of the Group Account and signals will remain fixed for the 8 rounds of 3 out of the 4 periods. Also remember that the true value of the return rate has to be compatible with all signals.</p><p>In these practice rounds return rates and signals change every round to help you better understand the experiment.</p> 
+
+	{% endif %}
+
+
+
+{% else %}
+
+	{% if treatment == 1 %}
+	<p>The table below reports what is the return rate of the Group Account for this round (the cell highlighted in green).</p>	
+
+	{% elif treatment == 2 or treatment == 4 %}
+	<p>The table below reports your signal for this round (the number in the middle green cell). The three green cells show you what are the possible values of the true return rate of the Group Account in this round, based on your signal.</p>
+
+	{% elif treatment == 3 or treatment == 5 %}
+	<p>The table below shows what is your signal for this round (the number in the middle green cell in the row corresponding to your ID).Your three green cells show you what are the possible values of the true return rate of the Group Account in this round, based on your signal. The table also shows you the signals of the other group members. The three green cells for their signals show you what are the possible values of the  true return rate of the Group Account, based on their signals.  Also remember that the true value of the return rate has to be compatible with all signals.</p>
+
+	{% endif %}
+
+{% endif %}
+</div>

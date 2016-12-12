@@ -1,0 +1,17 @@
+{% extends "global/Base.html" %}
+{% load staticfiles otree_tags %}
+
+{% block title %}
+	Survey
+{% endblock %}
+
+{% block content %}
+
+<p>Thank you for participating in today's experiment! The next page contains a short demographic survey. We would appreciate if you could answer these questions. After the survey, the computer will randomly select 1 of the 4 periods of the main experiment. You and your group members for that period will be paid according to the decisions made in the 8 rounds of that period.</p>
+
+<p>Please click next to continue</p>
+
+{% next_button %}
+
+{% endblock %}
+

@@ -1,0 +1,32 @@
+{% extends "global/Base.html" %}
+{% load staticfiles otree_tags %}
+
+{% block title %}
+	End of practice game results
+{% endblock %}
+
+{% block content %}
+
+	<table class="table">
+		<tr>
+			<th>Round</th>
+			<th>N. of Tokens</th>
+			<th>Your investment in the Group Account</th>
+			<th>Round Earnings</th>
+		</tr>
+	{% for round in info %}
+		<tr>
+			<td>{{ round.subsession.round_number }}</td>
+			<td>{{ Constants.template_endowment }}.00</td>
+			<td>{{ round.contribution }}</td>
+			<td>{{ round.potential_payoff }}</td>
+		</tr>
+	{% endfor %}
+
+	</table>
+	<p>This concludes the practice rounds. You will now begin the experiment. I Remember that in the experiment, in each period you will be rematched with new group members. If you have questions please raise your hand, otherwise please click "next" button to proceed.</p>
+	{% next_button %}
+	
+{% endblock %}
+
+

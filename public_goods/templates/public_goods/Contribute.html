@@ -1,0 +1,28 @@
+{% extends "global/Base.html" %}
+{% load staticfiles otree_tags %}
+
+{% block title %}
+    Investment decision
+{% endblock %}
+
+{% block content %}
+
+    {% formfield player.contribution with label="How many tokens do you want to invest in the Group Account (from 0 to 10)? The tokens that you do not invest in the Group Account will be added automatically to your Individual Account." %}
+
+    {% next_button %}
+
+{% if treatment == 1 %}
+	{% include 'public_goods/signal_exact.html' %}
+{% elif treatment == 2 or treatment == 3 %}
+	{% include "public_goods/signal.html" %}
+{% else %}
+	{% include "public_goods/signal_pics.html" %}
+{% endif %}
+{% include 'public_goods/table_explanation.html' %}
+{% include "public_goods/Instructions.html" %}
+<p><strong>Period:</strong> {{ player.get_round_period.1 }} <strong>Round</strong>: {{ player.get_round_period.0 }}</p>
+{% endblock %}
+
+{% block content_at_bottom_of_body %}
+	{% include 'public_goods/alert.html' %}
+{% endblock %}
