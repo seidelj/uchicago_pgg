@@ -29,8 +29,13 @@ Create app at heroku.com.
 -- OTREE_AUTH_LEVEL
 -- OTREE_PRODUCTION
 
-Optionally, install heroku's command line tools.  This may be useful to some.
+install heroku's command line tools.  This may be useful to some.
 $ heroku git:remote -a your_heroku_apps_name
+
+Set up the database
+$ heroku run python manage.py mirgate
+
+
 
 NOTES
 Uses an old build of oTree.  Requires SQL database backends.  If you are trying to run locally or develop, you'll need psycopg2, which depends on postgres drivers.  Do your own research.
