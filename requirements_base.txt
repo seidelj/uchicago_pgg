@@ -6,4 +6,5 @@ boto==2.38.0
 django-s3direct==0.3.11
 psycopg2==2.5.1
 django-toolbelt==0.0.1
+babel==1.3
 
