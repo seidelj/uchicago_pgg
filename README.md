@@ -1,4 +1,7 @@
-Create a virtual environment
+Background on getting started with Heroku: https://devcenter.heroku.com/articles/getting-started-with-python#introduction
+You only need to get through the first two pages.  I'll pick up from there.
+
+Create a virtual environment.
 $ virtualenv venv
 
 Activate
@@ -20,7 +23,6 @@ $ pip install -r requirements.txt
 
 
 Create app at heroku.com.
--Add a postgres database (reccommend a standard tier, otherwise you will have problems when running the experiment)
 -Under Settings>Reveal Config Variable add the following based on envirnment variables defined above
 -- SECRET_KEY 
 -- ADMIN_USERNAME
@@ -29,9 +31,14 @@ Create app at heroku.com.
 -- OTREE_AUTH_LEVEL
 -- OTREE_PRODUCTION
 
-install heroku's command line tools.  This may be useful to some.
+install heroku's command line tools.  You'll will want to have you heroku app linked to the directory that contains the code to run the experiment.
 $ heroku git:remote -a your_heroku_apps_name
 
+Provision a database (reade more: https://devcenter.heroku.com/articles/heroku-postgresql#provisioning-the-add-on)
+I strongly recommend standard-0, otherwise there will performance issues in the lab. https://elements.heroku.com/addons/heroku-postgresql
+
+$ heroku addons:create heroku-postgresql:standard-0
+$ heroku pg:wait
 Set up the database
 $ heroku run python manage.py mirgate
 
