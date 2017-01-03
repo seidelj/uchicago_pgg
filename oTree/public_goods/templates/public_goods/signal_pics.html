@@ -1,0 +1,45 @@
+{% if treatment == 4 %}
+{# Private photos #}
+{% elif treatment == 5 %}
+{# public photos #}
+{% endif %}
+<div id="div-table" class="table-responsive">
+	<table class="table table-bordered table-condensed">
+		<tr>
+			<th></th>
+			<th class="active" style="text-align:center;" colspan="13">Return rate of G.A.</th>
+		</tr>
+		<tr>
+			<th>Group Members</th>
+			{% for x in table_headers %}
+				<th class="active">{{ x }}</th>
+			{% endfor %}
+		</tr>
+		<tr>
+			<td style="width: 155px;"><img height="auto" style="max-width: 140px;" class="img-thumbnail" src="{{ player.participant.playerimage.image }}" /></td>
+			{% for x in table_headers %}
+				{% if x == player.get_signal_values.left or x == player.get_signal_values.right or x == player.signal %}
+			<td class="success">{% if x == player.signal %}{{ player.signal }}{% endif %}</td>
+				{% else %}
+			<td> </td>
+				{% endif %}
+			{% endfor %}
+		</tr>
+		{% for p in player.get_others_in_group %}
+		<tr>
+			<td><img height="auto" style="max-width: 140px;" class="img-thumbnail" src="{{ p.participant.playerimage.image }}" /></td>
+						{% for x in table_headers %}
+				{% if x == p.get_signal_values.left or x == p.get_signal_values.right or x == p.signal %}
+			<td {% if treatment == 5 %}class="success"{% endif %}> {% if x == p.signal and treatment == 5 %}{{ p.signal }}{% endif %}</td>
+				{% else %}
+			<td> </td>
+				{% endif %}
+						{% endfor %}
+		</tr>
+		{% endfor %}
+	</table>
+</div>
+				
+			
+			
+

@@ -1,0 +1,78 @@
+{% extends "global/Base.html" %}
+{% load staticfiles otree_tags %}
+
+{% block title %}
+    Betting Task
+{% endblock %}
+
+{% block content %}
+
+{% include "risk/ambiguity_instructions.html" %}
+  
+<div id='div-table' class="table-responsive">
+	<table class="table table-condensed">
+		<tr>
+			<td></td>
+			<th><img width="auto" style="max-width: 140px;" class="img-thumbnail" src="{% static  'risk/uncertain.png' %}"/></th>
+			<th><img width="auto" style="max-width: 140px;" class="img-thumbnail" src="{% static  'risk/certain.png' %}"/></th>
+			<th></th>
+		</tr>
+		<tr>
+			<th style="border-top:none;"></th>
+			<th style="border-right: 1px solid #ddd; border-top:none;">Black ?% White ?%</th><th style="border-top:none;">Black 50% White 50%</th>
+			<th style="border-top:none;">Choose the color you want to bet on</th>
+		</tr>
+	{% for field in form %}
+		{% with x=forloop.counter %}
+		{% if x <= 10 %}
+		<tr>
+			<th>Question {{ x }}</th>
+			<td style="border-right: 1px solid #ddd;">		
+				<div class="form-group required">
+				<label class="control-label" for="id_amb_choice{{ x }}_urn"></label>
+				<div class="controls field-amb_choice{{ x }}_urn">
+				<div class="form-group required">										
+					<label class="radio-inline" for="id_amb_choice{{ x }}_urn_1">
+						<input type="radio" id="id_amb_choice{{ x }}_urn_1" name="amb_choice{{ x }}_urn" value="0" required>
+						{% for key, value in urndict.items %}
+							{% if key == x|stringformat:'s' %}
+								{{ value.0 }}
+							{% endif %}
+						{% endfor %}
+					</label>
+				</div>
+				</div>
+				</div>
+			</td>
+			<td>
+				<div class="form-group required">
+				<label class="control-label" for="id_amb_choice{{ x }}_urn"></label>
+				<div class="controls field-amb_choice{{ x }}_urn">
+				<div class="form-group required">	
+					<label class="radio-inline" for="id_amb_choice{{ x }}_urn_2">
+						<input type="radio" id="id_amb_choice{{ x }}_urn_2" name="amb_choice{{ x }}_urn" value="1" required>
+						{% for key, value in urndict.items %}
+							{% if key == x|stringformat:'s' %}
+								{{ value.1 }}
+							{% endif %}
+						{% endfor %}
+					</label>
+				</div>
+				</div>
+				</div>
+			</td>
+		{% endif %}			
+			
+			{% if "_urn" not in field.name %}
+			<td>{% formfield field %}</td>
+			{% endif %}
+			
+		</tr>
+		{% endwith %}
+	{% endfor %}
+	</table>
+		
+    {% next_button %}
+	
+{% endblock %}
+

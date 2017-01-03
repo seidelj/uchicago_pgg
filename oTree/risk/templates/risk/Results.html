@@ -1,0 +1,38 @@
+{% extends "global/Base.html" %}
+{% load staticfiles otree_tags %}
+
+{% block title %}
+    Coin Flip Results
+{% endblock %}
+
+{% block content %}
+
+<h3>Coin flip results</h3>
+<p>The coin flipped landed on {% if player.risk_flip == 0 %}heads{% else %}tails{% endif %}</p>
+<p>You chose Gamble {{ player.risk_choice }} so the total tokens you earned in this game is {{ player.risk_points }}</p>
+
+	{% include "risk/risk_table.html" %}
+
+<h3>Urn drawing results</h3>
+	<div id="div-table" class="table-responsive">
+		<table class="table table-condensed">
+			<tr>
+			<th>The choice the computer picked:</th><td>Choice {{ player.amb_chosen_game }}</td>
+			</tr>
+			<tr>
+				<th>The urn you chose to draw from:</th><td>{{ player.get_chosen_urn }}</td>
+			</tr>
+			<tr>
+				<th>Color You Chose</th><td>{{ player.get_chosen_color }}</td>
+			</tr>
+			<tr>				
+				<th>Color Drawn</th><td>{{ player.get_drawn_color }}</td>
+			</tr>
+			<tr>				
+				<th>Your earnings for this game:</th><td>{{ player.amb_points }} Tokens</td>
+			</tr>
+		</table>
+
+   {% next_button %}
+{% endblock %}
+

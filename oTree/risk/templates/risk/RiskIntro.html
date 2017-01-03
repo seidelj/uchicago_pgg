@@ -1,0 +1,17 @@
+{% extends "global/Base.html" %}
+{% load staticfiles otree_tags %}
+
+{% block title %}
+	End of main experiment
+{% endblock %}
+
+{% block content %}
+
+<p>The main experiment is over. You will now be given the chance to earn additional tokens by completing 1 additional quick task. The tasks is independent from the experiment. What you earn from this task does not depend on other participants’ decisions. At the end of the session, the lab assistant will add your earnings from this task to your experiments' earnings.</p>
+
+<p>Please click next to continue</p>
+
+{% next_button %}
+
+{% endblock %}
+

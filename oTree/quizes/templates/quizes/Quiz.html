@@ -1,0 +1,36 @@
+{% extends "global/Base.html" %}
+{% load staticfiles otree_tags %}
+
+{% block title %}
+    QUIZ
+{% endblock %}
+
+
+{% block content %}
+
+{% if form.errors %}
+	<div class="alert alert-danger">
+		Alteast one of your selections is incorrect.
+	</div>
+{% endif %}	
+
+{% if tbl %}
+<p>Suppose for this round you are ID: <strong>{{ quizDict.table.0.0 }}</strong></p>
+	{% if treatment == 1 %}
+		{% include "quizes/q_signal_exact.html" %}
+	{% else %}
+		{% include "quizes/q_signal.html" %}
+	{% endif %}
+{% endif %}
+	{% for field in form %}
+		{% for key, value in quizDict.items %}
+			{% if field.name == key %}
+    			{% formfield field with label=value.0 %}
+			{% endif %}
+		{% endfor %}
+	{% endfor %}
+    {% next_button %}
+
+
+{% endblock %}
+
