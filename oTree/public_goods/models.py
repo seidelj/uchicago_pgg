@@ -120,6 +120,15 @@ GROUP_DICT = {
 }
 
 class Subsession(otree.models.BaseSubsession):
+
+    paying_game = models.CharField()
+    game_number = models.CharField()
+    game_round = models.CharField()
+    mpcr_order = models.CharField()
+    varied_mpcr_game = models.CharField()
+    treatment = models.CharField()
+    signalVariance = models.CharField()
+
     def get_all_rounds(self):
         qs = type(self).objects.filter(session_id=self.session_id).order_by('round_number')
         return list(qs)
@@ -135,12 +144,41 @@ class Subsession(otree.models.BaseSubsession):
             paying_round = random.choice(Constants.starting_rounds)
             self.session.vars['paying_round'] = paying_round
 
+        #Set a bunch of variables for data export
+        #Determine which game, round and whether the stakes are real.
+        x = 1
+        for r in Constants.starting_rounds:
+            if self.round_number in range(r, r+Constants.rounds_per_game):
+                game_number = x
+                break
+            else:
+                x += 1
+        game_round = (self.round_number - Constants.starting_rounds[x-1]) + 1
+
+        if self.round_number in range(self.session.vars['paying_round'], self.session.vars['paying_round']+Constants.rounds_per_game):
+            self.paying_game = 1
+        else:
+            self.paying_game = 0
+        self.game_number = game_number
+        self.game_round = game_round
+        self.mpcr_order = self.session.config['mpcrOrder']
+        self.treatment = self.session.config['treatment']
+        self.signalVariance = self.session.config['signalVariance']
+        self.save()
+
         # Displays order in the logs at creation of session
         if self.round_number == Constants.starting_rounds[0]:
             order = Constants.mpcrOrders[self.session.config['mpcrOrder'] - 1]
             for k, v in order.items():
                 if v == "vr": self.session.vars['varied_round'] = k
             print("Order {}: {}".format(self.session.config['mpcrOrder'], order))
+
+        #Set varied mpcr round for data export
+        if self.round_number in range(self.session.vars['varied_round'], self.session.vars['varied_round']+Constants.rounds_per_game):
+            self.varied_mpcr_game = 1
+        else:
+            self.varied_mpcr_game = 0
+        self.save()
 
         # Reorder teams in between games
         if self.round_number in Constants.starting_rounds:
