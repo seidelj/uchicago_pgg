@@ -10,7 +10,7 @@ from decimal import *
 # </standard imports>
 
 doc = """
-This is 4-period public goods game with 16 players.  Assignment to the group is predermined
+This is a 4 games of 8 rounds public goods game with 16 players.  Assignment to the group is predetermined.
 
 """
 
@@ -219,7 +219,7 @@ class Subsession(otree.models.BaseSubsession):
         self.set_varying_efficiency_rate()
         for p in self.get_players():
             p.set_signal_value()
-            p.set_group_id()
+
 
     def set_efficiency_rate(self):
         order = Constants.mpcrOrders[self.session.config['mpcrOrder'] - 1]
