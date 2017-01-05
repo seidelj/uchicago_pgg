@@ -1,3 +1,20 @@
+First, you will need to have Python 3.5 installed and oTree.  oTree provides installation instructions for both in their documentation: http://otree.readthedocs.io/en/latest/install.html
+NOTE: I recomend installing oTree into a virtual environment.  This will make sure you don't violate any dependencies in other projects. Additionally, environment variables will likely be required; better they are specified in the virtual env than computers profile.  Python35 comes preloaded with a package that will create virtual environments.
+
+
+Initializing a virtual environment and activating it.
+'''
+$ pyvenv venv
+$ source venv/bin/activate
+'''
+
+If you have installed python35 and it is working correctly, oTree installation boils down to
+'''
+(venv)$ pip3 install otree
+'''
+
+
+
 Background on getting started with Heroku: https://devcenter.heroku.com/articles/getting-started-with-python#introduction
 You only need to get through the first two pages.  I'll pick up from there.
 
