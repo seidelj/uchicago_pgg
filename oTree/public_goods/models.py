@@ -10,7 +10,7 @@ from decimal import *
 # </standard imports>
 
 doc = """
-This is 4-period public goods game with 16 players.  Assignment to the group is predermined
+This is a 4 games of 8 rounds public goods game with 16 players.  Assignment to the group is predetermined.
 
 """
 
@@ -120,6 +120,28 @@ GROUP_DICT = {
 }
 
 class Subsession(otree.models.BaseSubsession):
+
+    paying_game = models.CharField(
+        doc="0 if the game is a hypothetical round, 1 otherwise"
+    )
+    game_number = models.CharField(
+        doc="Each player plays 4 games, each against different player.  This variable indicates which is being played."
+    )
+    game_round = models.CharField(
+        doc="Each game is 8 rounds, this variables tells you which.")
+    mpcr_order = models.CharField(
+        doc="Dummy variable for the order of MPRC's seen accross the 4 games a participant plays.  See: github.com/seidelj/uchicago_pgg"
+    )
+    varied_mpcr_game = models.CharField(
+        doc="In one of the 4 games plays, the MPCR is varied each round.  1 if that is happening in the observed round, 0 otherwise"
+    )
+    treatment = models.CharField(
+        doc="Dummy variable for the treatment of the observed session. See: github.com/seidelj/uchicago_pgg"
+    )
+    signalVariance = models.CharField(
+            doc="Think of this as the size of the signal that a participant observes.  0:exact value; 1:narrow signal; 2:wide signal;"
+    )
+
     def get_all_rounds(self):
         qs = type(self).objects.filter(session_id=self.session_id).order_by('round_number')
         return list(qs)
@@ -135,12 +157,41 @@ class Subsession(otree.models.BaseSubsession):
             paying_round = random.choice(Constants.starting_rounds)
             self.session.vars['paying_round'] = paying_round
 
+        #Set a bunch of variables for data export
+        #Determine which game, round and whether the stakes are real.
+        x = 1
+        for r in Constants.starting_rounds:
+            if self.round_number in range(r, r+Constants.rounds_per_game):
+                game_number = x
+                break
+            else:
+                x += 1
+        game_round = (self.round_number - Constants.starting_rounds[x-1]) + 1
+
+        if self.round_number in range(self.session.vars['paying_round'], self.session.vars['paying_round']+Constants.rounds_per_game):
+            self.paying_game = 1
+        else:
+            self.paying_game = 0
+        self.game_number = game_number
+        self.game_round = game_round
+        self.mpcr_order = self.session.config['mpcrOrder']
+        self.treatment = self.session.config['treatment']
+        self.signalVariance = self.session.config['signalVariance']
+        self.save()
+
         # Displays order in the logs at creation of session
         if self.round_number == Constants.starting_rounds[0]:
             order = Constants.mpcrOrders[self.session.config['mpcrOrder'] - 1]
             for k, v in order.items():
                 if v == "vr": self.session.vars['varied_round'] = k
             print("Order {}: {}".format(self.session.config['mpcrOrder'], order))
+
+        #Set varied mpcr round for data export
+        if self.round_number in range(self.session.vars['varied_round'], self.session.vars['varied_round']+Constants.rounds_per_game):
+            self.varied_mpcr_game = 1
+        else:
+            self.varied_mpcr_game = 0
+        self.save()
 
         # Reorder teams in between games
         if self.round_number in Constants.starting_rounds:
@@ -168,7 +219,7 @@ class Subsession(otree.models.BaseSubsession):
         self.set_varying_efficiency_rate()
         for p in self.get_players():
             p.set_signal_value()
-            p.set_group_id()
+
 
     def set_efficiency_rate(self):
         order = Constants.mpcrOrders[self.session.config['mpcrOrder'] - 1]
@@ -199,26 +250,22 @@ class Subsession(otree.models.BaseSubsession):
             for group in self.get_groups():
                 group.efficiency_rate = newMpcr
 
-#def determine_round(player):
-#    x = 0
-#    for r in Constants.starting_rounds:
-#        if player.subsession.round_number in range(r, r+Constants.rounds_per_game):
-#            game_number = x
-#            break
-#        else:
-#            x += 1
-#    return x
-
 class Group(otree.models.BaseGroup):
 
     # <built-in>
-    subsession = models.ForeignKey(Subsession)
+    #subsession = models.ForeignKey(Subsession)
     # </built-in>
 
-    total_contribution = models.DecimalField(max_digits=12, decimal_places=2)
-    individual_share = models.DecimalField(max_digits=12, decimal_places=2)
+    total_contribution = models.DecimalField(max_digits=12, decimal_places=2,
+        doc="The aggregate of all member's of a given game's contributions"
+    )
+    individual_share = models.DecimalField(max_digits=12, decimal_places=2,
+        doc="total_contribution divided by 4"
+    )
 
-    efficiency_rate = models.DecimalField(max_digits=12, decimal_places=2)
+    efficiency_rate = models.DecimalField(max_digits=12, decimal_places=2,
+        doc="This is the group's true MPCR"
+    )
 
     def set_efficiency_rate(self):
         #Used for singular MPRC throughout the game
@@ -290,45 +337,29 @@ class Group(otree.models.BaseGroup):
 class Player(otree.models.BasePlayer):
 
     # <built-in>
-    group = models.ForeignKey(Group, null=True)
-    subsession = models.ForeignKey(Subsession)
+    #group = models.ForeignKey(Group, null=True)
+    #subsession = models.ForeignKey(Subsession)
     # </built-in>
 
-    treatment = models.IntegerField()
+    treatment = models.IntegerField(
+        doc="The player's treatment; identical to subsession.treatment"
+    )
 
     contribution = models.DecimalField(
         min=0, max=Constants.endowment,
-        doc="""The amount contributed by the player""",
         max_digits=12, decimal_places=2,
+        doc="The amount the player contributed for the observed round",
     )
 
-    signal = models.DecimalField(max_digits=12, decimal_places=2)
-    potential_payoff = models.DecimalField(max_digits=12, decimal_places=2)
-    points = models.DecimalField(max_digits=12, decimal_places=2)
-
-    sub_group_id = models.CharField()
-
-    def set_group_id(self):
-        players = self.subsession.get_players()
-        if len(players) == 16:
-            for item in self.in_all_rounds():
-                if item.subsession.round_number in Constants.starting_rounds:
-                    players = item.subsession.get_players()
-                    rn = item.subsession.round_number
-                    newPlayerOrder = reorder_group(players, GROUP_DICT[rn])
-                    num_groups = int(len(players) / Constants.players_per_group)
-                    list_of_lists = []
-                    start_index = 0
-                    for g_num in range(num_groups):
-                        next_group = newPlayerOrder[start_index:start_index+Constants.players_per_group]
-                        start_index += Constants.players_per_group
-                        list_of_lists.append(next_group)
-                    for l in list_of_lists:
-                        if item in l:
-                            indx = list_of_lists.index(l)
-                    item.sub_group_id = "{}{}".format(rn, indx)
-                else:
-                    item.sub_group_id = item.in_previous_rounds()[-1].sub_group_id
+    signal = models.DecimalField(max_digits=12, decimal_places=2,
+        doc="The signal observed by the player in given round",
+    )
+    potential_payoff = models.DecimalField(max_digits=12, decimal_places=2,
+        doc="The value of group contributions divided by 4 for a given round plus whatever remains from the player's endowment.  This varaible is required by the application when determining payouts because stakes are not always real"
+    )
+    points = models.DecimalField(max_digits=12, decimal_places=2,
+        doc="The same as player.potential_payoff except this only gets populated when stakes are real.  The variable is required by the application when determining payouts because stakes are not always real"
+    )
 
     def set_signal_value(self):
         rn = self.subsession.round_number

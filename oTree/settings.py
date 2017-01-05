@@ -136,10 +136,10 @@ BASE_SESSION_CONFIGS = [
     },
     {
         'name': 'public_goods_6',
-        'display_name': 'Public Goods Public Signal-Wide',
+        'display_name': 'Public Goods Private Signal-Wide',
         'num_demo_participants': 16,
         'app_sequence': ['quizes', 'training', 'public_goods', 'risk', 'survey', 'payment_info'],
-        'treatment': 3,
+        'treatment': 2,
         'mpcrOrder': 1,
         'signalVariance': 2,
     },
@@ -169,7 +169,14 @@ for baseSession in BASE_SESSION_CONFIGS:
             SESSION_CONFIGS.append(session)
     else:
         SESSION_CONFIGS.append(baseSession)
+RISK_CONFIG = {
+    'name': "risk",
+    'display_name': 'Risk Games',
+    'num_demo_participants': 1,
+    'app_sequence': ['risk'],
+}
 
+SESSION_CONFIGS.append(RISK_CONFIG)
 
 # anything you put after the below line will override
 # oTree's default settings. Use with caution.
