@@ -111,7 +111,8 @@ BASE_SESSION_CONFIGS = [
         'name': 'public_goods_1',
         'display_name': 'Public Goods Exact',
         'num_demo_participants': 16,
-        'app_sequence': ['quizes', 'training', 'public_goods', 'risk', 'survey', 'payment_info'],
+        #'app_sequence': ['quizes', 'training', 'public_goods', 'risk', 'survey', 'payment_info'],
+        'app_sequence': ['training', 'public_goods'],
         'treatment': 1,
         'mpcrOrder': 1,
         'signalVariance': 0,
@@ -120,7 +121,8 @@ BASE_SESSION_CONFIGS = [
         'name': 'public_goods_2',
         'display_name': 'Public Goods Private Signal-Narrow',
         'num_demo_participants': 16,
-        'app_sequence': ['quizes', 'training', 'public_goods', 'risk', 'survey', 'payment_info'],
+        #'app_sequence': ['quizes', 'training', 'public_goods', 'risk', 'survey', 'payment_info'],
+        'app_sequence': ['training', 'public_goods'],
         'treatment': 2,
         'mpcrOrder': 2,
         'signalVariance': 1,
@@ -129,7 +131,8 @@ BASE_SESSION_CONFIGS = [
         'name': 'public_goods_3',
         'display_name': 'Public Goods Public Signal-Narrow',
         'num_demo_participants': 16,
-        'app_sequence': ['quizes', 'training', 'public_goods', 'risk', 'survey', 'payment_info'],
+        #'app_sequence': ['quizes', 'training', 'public_goods', 'risk', 'survey', 'payment_info'],
+        'app_sequence': ['training', 'public_goods'],
         'treatment': 3,
         'mpcrOrder': 3,
         'signalVariance': 1,
@@ -138,7 +141,8 @@ BASE_SESSION_CONFIGS = [
         'name': 'public_goods_6',
         'display_name': 'Public Goods Private Signal-Wide',
         'num_demo_participants': 16,
-        'app_sequence': ['quizes', 'training', 'public_goods', 'risk', 'survey', 'payment_info'],
+        #'app_sequence': ['quizes', 'training', 'public_goods', 'risk', 'survey', 'payment_info'],
+        'app_sequence': ['training', 'public_goods'],
         'treatment': 2,
         'mpcrOrder': 1,
         'signalVariance': 2,
@@ -147,7 +151,8 @@ BASE_SESSION_CONFIGS = [
         'name': 'public_goods_7',
         'display_name': 'Public Goods Public Signal-Wide',
         'num_demo_participants': 16,
-        'app_sequence': ['quizes', 'training', 'public_goods', 'risk', 'survey', 'payment_info'],
+        #'app_sequence': ['quizes', 'training', 'public_goods', 'risk', 'survey', 'payment_info'],
+        'app_sequence': ['training', 'public_goods'],
         'treatment': 3,
         'mpcrOrder': 1,
         'signalVariance': 2,
@@ -176,7 +181,7 @@ RISK_CONFIG = {
     'app_sequence': ['risk'],
 }
 
-SESSION_CONFIGS.append(RISK_CONFIG)
+#SESSION_CONFIGS.append(RISK_CONFIG)
 
 # anything you put after the below line will override
 # oTree's default settings. Use with caution.

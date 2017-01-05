@@ -11,18 +11,18 @@ from . import views
 
 
 class PlayerBot(Bot):
-    def play_round(self): 
-        
+    def play_round(self):
+
         if self.subsession.round_number in Constants.starting_rounds:
             self.submit(views.NewGame)
 
         self.submit(
             views.Contribute, {
-                "contribution": random.choice(range(0, Constants.endowment))
+                "contribution": random.choice(range(0, Constants.template_endowment+1))
             }
         )
         self.submit(views.Results)
-        
+
         if self.subsession.round_number in [8, 16, 24, 32]:
             self.submit(views.ResultsSummary)
 

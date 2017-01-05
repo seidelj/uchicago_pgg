@@ -322,10 +322,10 @@ class Group(otree.models.BaseGroup):
         self.total_contribution = sum([p.contribution for p in self.get_players()])
         self.individual_share = self.total_contribution * self.efficiency_rate
         for p in self.get_players():
-            p.potential_payoff = (Constants.endowment - p.contribution) + self.individual_share
+            p.hypothetical_points = (Constants.endowment - p.contribution) + self.individual_share
             if x <= self.subsession.round_number <= x + 7:
-                p.payoff = p.potential_payoff * self.session.real_world_currency_per_point
-                p.points = p.potential_payoff
+                p.payoff = p.hypothetical_points * self.session.real_world_currency_per_point
+                p.points = p.hypothetical_points
             else:
                 p.points = 0
                 p.payoff = 0
@@ -354,11 +354,11 @@ class Player(otree.models.BasePlayer):
     signal = models.DecimalField(max_digits=12, decimal_places=2,
         doc="The signal observed by the player in given round",
     )
-    potential_payoff = models.DecimalField(max_digits=12, decimal_places=2,
+    hypothetical_points = models.DecimalField(max_digits=12, decimal_places=2,
         doc="The value of group contributions divided by 4 for a given round plus whatever remains from the player's endowment.  This varaible is required by the application when determining payouts because stakes are not always real"
     )
     points = models.DecimalField(max_digits=12, decimal_places=2,
-        doc="The same as player.potential_payoff except this only gets populated when stakes are real.  The variable is required by the application when determining payouts because stakes are not always real"
+        doc="The same as player.hypothetical_points except this only gets populated when stakes are real.  The variable is required by the application when determining payouts because stakes are not always real"
     )
 
     def set_signal_value(self):

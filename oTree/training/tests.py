@@ -18,7 +18,7 @@ class PlayerBot(Bot):
 		pt = self.player.treatment
 		uploads = False
 		if pt == 4 or pt ==5: uploads = True
-			
+
 		if self.subsession.round_number == 1 and uploads:
 			self.submit(
 				views.UploadImage, {
@@ -28,7 +28,7 @@ class PlayerBot(Bot):
 
 		self.submit(
 			views.Contribute, {
-				"contribution": random.choice(range(0, Constants.endowment))
+				"contribution": random.choice(range(0, Constants.template_endowment))
 			}
 		)
 
