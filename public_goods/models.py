@@ -418,7 +418,7 @@ class Player(otree.models.BasePlayer):
         for p in self.in_all_rounds():
             if p.subsession.round_number in Constants.starting_rounds:
                 payoffs = []
-            payoffs.append(p.potential_payoff)
+            payoffs.append(p.hypothetical_points)
         return sum(payoffs)
 
     def set_session_payoffs(self):

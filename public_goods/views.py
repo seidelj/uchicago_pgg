@@ -43,7 +43,7 @@ class Results(Page):
 	def vars_for_template(self):
 		return {
 			'total_earnings': self.group.total_contribution * self.group.efficiency_rate,
-            'individual_earnings': self.player.potential_payoff,
+            'individual_earnings': self.player.hypothetical_points,
 			'treatment': self.session.config['treatment'],
         }
 
