@@ -15,14 +15,12 @@
 	{% include 'public_goods/signal_exact.html' %}
 {% elif treatment == 2 or treatment == 3 %}
 	{% include "public_goods/signal.html" %}
-{% else %}
-	{% include "public_goods/signal_pics.html" %}
 {% endif %}
 {% include 'public_goods/table_explanation.html' %}
 {% include "public_goods/Instructions.html" %}
 <p><strong>Period:</strong> {{ player.get_round_period.1 }} <strong>Round</strong>: {{ player.get_round_period.0 }}</p>
 {% endblock %}
 
-{% block content_at_bottom_of_body %}
+{% block scripts %}
 	{% include 'public_goods/alert.html' %}
 {% endblock %}

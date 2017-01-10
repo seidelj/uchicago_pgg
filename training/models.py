@@ -13,10 +13,10 @@ from decimal import Decimal
 
 # </standard imports>
 
-author = 'Your name here'
+author = 'Joseph Seidel'
 
 doc = """
-Your app description
+Training module for public goods game.
 """
 
 
