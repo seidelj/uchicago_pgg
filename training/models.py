@@ -110,7 +110,7 @@ class Group(otree.models.BaseGroup):
         self.total_contribution = sum([p.contribution for p in self.get_players()])
         self.individual_share = self.total_contribution * self.efficiency_rate
         for p in self.get_players():
-            p.potential_payoff = (Constants.endowment - p.contribution) + self.individual_share
+            p.hypothetical_points = (Constants.endowment - p.contribution) + self.individual_share
             p.payoff = 0
 
 class Player(otree.models.BasePlayer):
@@ -128,7 +128,7 @@ class Player(otree.models.BasePlayer):
     )
 
     signal = models.DecimalField(max_digits=12, decimal_places=2)
-    potential_payoff = models.DecimalField(max_digits=12, decimal_places=2)
+    hypothetical_points = models.DecimalField(max_digits=12, decimal_places=2)
 
     def set_signal_value(self):
         mpcr = self.group.efficiency_rate
@@ -174,7 +174,7 @@ class Player(otree.models.BasePlayer):
     def get_game_payoffs(self):
         payoffs = []
         for p in self.in_all_rounds():
-            payoffs.append(p.potential_payoff)
+            payoffs.append(p.hypothetical_points)
 
     def get_round_period(self):
         x = 1

@@ -139,7 +139,7 @@ class Subsession(otree.models.BaseSubsession):
         doc="Dummy variable for the treatment of the observed session. See: github.com/seidelj/uchicago_pgg"
     )
     signalVariance = models.CharField(
-            doc="Think of this as the size of the signal that a participant observes.  0:exact value; 1:narrow signal; 2:wide signal;"
+        doc="Think of this as the size of the signal that a participant observes.  0:exact value; 1:Thin signal; 2:Thick signal;"
     )
 
     def get_all_rounds(self):

@@ -19,18 +19,16 @@
 			<td>{{ round.subsession.round_number }}</td>
 			<td>{{ Constants.template_endowment }}.00</td>
 			<td>{{ round.contribution }}</td>
-			<td>{{ round.potential_payoff }}</td>
+			<td>{{ round.hypothetical_points }}</td>
 		</tr>
 	{% endfor %}
 
 	</table>
 	{% if not varied %}<p>The true return rate of the Group Account for this period was {{ group.efficiency_rate }}</p>{% endif %}
 	<p>Your earnings for this game: {{ payoff }} Tokens</p>
-	
+
 	{% next_button %}
 	<p>Your actual earnings will be revealed based on a random selection of one of the four periods.</p>
 
 
 {% endblock %}
-
-

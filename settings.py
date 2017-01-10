@@ -109,50 +109,50 @@ SESSION_CONFIG_DEFAULTS = {
 BASE_SESSION_CONFIGS = [
     {
         'name': 'public_goods_1',
-        'display_name': 'Public Goods Exact',
+        'display_name': 'Public Goods Baseline',
         'num_demo_participants': 16,
-        #'app_sequence': ['quizes', 'training', 'public_goods', 'risk', 'survey', 'payment_info'],
-        'app_sequence': ['training', 'public_goods'],
+        'app_sequence': ['quizes', 'training', 'public_goods', 'risk', 'survey', 'payment_info'],
+        #'app_sequence': ['training', 'public_goods'],
         'treatment': 1,
         'mpcrOrder': 1,
         'signalVariance': 0,
     },
     {
         'name': 'public_goods_2',
-        'display_name': 'Public Goods Private Signal-Narrow',
+        'display_name': 'Public Goods Private Signal-Thin',
         'num_demo_participants': 16,
-        #'app_sequence': ['quizes', 'training', 'public_goods', 'risk', 'survey', 'payment_info'],
-        'app_sequence': ['training', 'public_goods'],
+        'app_sequence': ['quizes', 'training', 'public_goods', 'risk', 'survey', 'payment_info'],
+        #'app_sequence': ['training', 'public_goods'],
         'treatment': 2,
         'mpcrOrder': 2,
         'signalVariance': 1,
     },
     {
         'name': 'public_goods_3',
-        'display_name': 'Public Goods Public Signal-Narrow',
+        'display_name': 'Public Goods Public Signal-Thin',
         'num_demo_participants': 16,
-        #'app_sequence': ['quizes', 'training', 'public_goods', 'risk', 'survey', 'payment_info'],
-        'app_sequence': ['training', 'public_goods'],
+        'app_sequence': ['quizes', 'training', 'public_goods', 'risk', 'survey', 'payment_info'],
+        #'app_sequence': ['training', 'public_goods'],
         'treatment': 3,
         'mpcrOrder': 3,
         'signalVariance': 1,
     },
     {
         'name': 'public_goods_6',
-        'display_name': 'Public Goods Private Signal-Wide',
+        'display_name': 'Public Goods Private Signal-Thick',
         'num_demo_participants': 16,
-        #'app_sequence': ['quizes', 'training', 'public_goods', 'risk', 'survey', 'payment_info'],
-        'app_sequence': ['training', 'public_goods'],
+        'app_sequence': ['quizes', 'training', 'public_goods', 'risk', 'survey', 'payment_info'],
+        #'app_sequence': ['training', 'public_goods'],
         'treatment': 2,
         'mpcrOrder': 1,
         'signalVariance': 2,
     },
     {
         'name': 'public_goods_7',
-        'display_name': 'Public Goods Public Signal-Wide',
+        'display_name': 'Public Goods Public Signal-Thick',
         'num_demo_participants': 16,
-        #'app_sequence': ['quizes', 'training', 'public_goods', 'risk', 'survey', 'payment_info'],
-        'app_sequence': ['training', 'public_goods'],
+        'app_sequence': ['quizes', 'training', 'public_goods', 'risk', 'survey', 'payment_info'],
+        #'app_sequence': ['training', 'public_goods'],
         'treatment': 3,
         'mpcrOrder': 1,
         'signalVariance': 2,
@@ -174,11 +174,12 @@ for baseSession in BASE_SESSION_CONFIGS:
             SESSION_CONFIGS.append(session)
     else:
         SESSION_CONFIGS.append(baseSession)
+
 RISK_CONFIG = {
     'name': "risk",
     'display_name': 'Risk Games',
     'num_demo_participants': 1,
-    'app_sequence': ['risk'],
+    'app_sequence': ['risk', 'payment_info'],
 }
 
 #SESSION_CONFIGS.append(RISK_CONFIG)

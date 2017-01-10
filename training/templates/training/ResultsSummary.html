@@ -19,14 +19,12 @@
 			<td>{{ round.subsession.round_number }}</td>
 			<td>{{ Constants.template_endowment }}.00</td>
 			<td>{{ round.contribution }}</td>
-			<td>{{ round.potential_payoff }}</td>
+			<td>{{ round.hypothetical_points }}</td>
 		</tr>
 	{% endfor %}
 
 	</table>
 	<p>This concludes the practice rounds. You will now begin the experiment. I Remember that in the experiment, in each period you will be rematched with new group members. If you have questions please raise your hand, otherwise please click "next" button to proceed.</p>
 	{% next_button %}
-	
+
 {% endblock %}
-
-
