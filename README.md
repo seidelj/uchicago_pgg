@@ -17,17 +17,17 @@ There are two parts to first time setup.  First, setting the project up locally.
 Copy or pull this repository into an empty directory of your choosing.  Then from your computer's terminal, navigate to the directory. Is you type "ls" into the command prompt, you should see the files like settings.py and manage.py.
 
 Create a virtual environment in the directory.  (pyvenv is a command that comes with Python 3.5.  If the command is not working, check to make sure that your computer's path variable is set to look in wherever Python 3.5 is located.)
-'''
+```
 $ pyvenv venv
 $ source venv/bin/activate
-'''
+```
 
 If you are not familiar with virtual environments, the basic idea is that any python packages or environmental variables required will be specific and stored in the same location as this project on your local machine.  If the environment is 'active' you'll see '(venv)' on your terminal's command line. 
 
 Deactivate your virtual environment and set some variables.
-'''
+```
 (venv)$ deactivate
-'''
+```
 
 In a text editor, open the file venv/bin/activate.  (The venv folder will be located in the project's root directory).  A the bottom of the file, add the following lines.
 
