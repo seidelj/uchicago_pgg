@@ -1,13 +1,15 @@
 # -*- coding: utf-8 -*-
 from __future__ import division
-
 from otree.common import Currency as c, currency_range, safe_json
-
 from . import models
 from ._builtin import Page, WaitPage
 from .models import Constants
 import time
 
+
+#FOR TRANSLATION, REPLACE TEXT IN QUOTES
+_WAIT_PAGE_TITLE_TEXT = "Please Wait"
+_WAIT_PAGE_BODY_TEXT = "Please wait while the computer determines the coin flip and selects a choice for the urns."
 
 class RiskIntro(Page):
 
@@ -33,8 +35,9 @@ class Risk(Page):
         }
 
 class WaitPage(Page):
-    def body_text(self):
-        return "Please wait while the computer determines the coin flip and selects a choice for the urns."
+
+    title_text = _WAIT_PAGE_TITLE_TEXT
+    body_text = _WAIT_PAGE_BODY_TEXT
 
     def is_displayed(self):
         return True

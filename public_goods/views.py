@@ -6,6 +6,10 @@ from otree.common import Currency as c, currency_range
 from .models import Constants
 from django.views.generic import FormView
 
+#CHANGE TEXT IN QUOTES FOR TRANSLATION
+_RESULTS_WAIT_PAGE_TITLE_TEXT = "Please Wait"
+_RESULTS_WAIT_PAGE_BODY_TEXT = "Waiting for other participants to contribute."
+
 class Feedback(Page):
     def is_displayed(self):
         return True
@@ -26,11 +30,12 @@ class Contribute(Page):
 
 class ResultsWaitPage(WaitPage):
 
+    title_text = _RESULTS_WAIT_PAGE_TITLE_TEXT
+    body_text = _RESULTS_WAIT_PAGE_BODY_TEXT
+
     def after_all_players_arrive(self):
         self.group.set_payoffs()
 
-    def body_text(self):
-        return "Waiting for other participants to contribute."
 
 class Results(Page):
 

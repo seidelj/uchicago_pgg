@@ -1,13 +1,18 @@
 # -*- coding: utf-8 -*-
 from __future__ import division
-
 from otree.common import Currency as c, currency_range, safe_json
-
 from . import models
 from ._builtin import Page, WaitPage
 from .models import Constants
-
 from .QUIZ_KEY import dict_of_dicts
+
+#CHANGE THE TEXT IN QUOTES IF TRANSLATING
+_ERROR_MESSAGE = "Atleast one of your answers is not correct."
+
+_WAIT_PAGE_TITLE_TEXT = "Please Wait"
+_WAIT_PAGE_BODY_TEXT = "Waiting for all players to complete the quiz."
+
+
 
 class IDScreen(Page):
 
@@ -50,7 +55,7 @@ class QuizFirst(Page):
         for quiz, answer in answers.items():
             qkey = "q_first_{}".format(quiz)
             if values[qkey] != answer[1]:
-                return 'Atleast one of your answers is not correct'
+                return _ERROR_MESSAGE
 
 class QuizTwo(QuizFirst):
 
@@ -83,7 +88,7 @@ class QuizTwo(QuizFirst):
             if question != "table":
                 qkey = "{}_{}".format(quiz, question)
                 if values[qkey] != answer[1]:
-                    return "Atleast one of your answers is not correct"
+                    return _ERROR_MESSAGE
 
 
 class QuizThree(QuizTwo):
@@ -116,14 +121,15 @@ class QuizThree(QuizTwo):
             if question != "table":
                 qkey = "{}_{}".format(quiz, question)
                 if values[qkey] != answer[1]:
-                    return "Atleast one of your answers is not correct"
+                    return _ERROR_MESSAGE
 
 class QuizWaitPage(WaitPage):
 
     wait_for_all_groups = True
 
-    def body_text(self):
-        return "Waiting for all players to complete the quiz"
+    title_text = _WAIT_PAGE_TITLE_TEXT
+    body_text = _WAIT_PAGE_BODY_TEXT
+
 
 page_sequence = [
     IDScreen,

@@ -12,12 +12,6 @@ class SurveyIntro(Page):
 
     pass
 
-
-class Risk(Page):
-
-    """ Displays Participant ID number to be written on risk task """
-    pass
-
 class Demographics(Page):
 
     form_model = models.Player

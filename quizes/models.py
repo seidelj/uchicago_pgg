@@ -13,10 +13,10 @@ from .QUIZ_KEY import dict_of_dicts
 # </standard imports>
 from django.utils import timezone
 
-author = 'Your name here'
+author = 'Joe Seidel'
 
 doc = """
-Your app description
+Questions testing comprehension of instructions.
 """
 
 class Constants:

@@ -207,7 +207,9 @@ class Subsession(otree.models.BaseSubsession):
                 next_group = newPlayerOrder[start_index:start_index+Constants.players_per_group]
                 start_index += Constants.players_per_group
                 list_of_lists.append(next_group)
-            self.set_groups(list_of_lists)
+            self.set_group_matrix(list_of_lists)
+        else:
+            self.group_like_round(self.round_number-1)
 
 
         # set efficiency rate and noisy signals

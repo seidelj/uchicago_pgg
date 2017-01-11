@@ -1,0 +1,17 @@
+participant.id_in_session,participant.code,participant.label,participant._is_bot,participant._index_in_pages,participant._max_page_index,participant._current_app_name,participant._round_number,participant._current_page_name,participant.ip_address,participant.time_started,participant.exclude_from_data_analysis,participant.visited,participant.mturk_worker_id,participant.mturk_assignment_id,player.id_in_group,player.payoff,group.id_in_subsession,subsession.round_number,session.code,session.label,session.experimenter_name,session.time_scheduled,session.time_started,session.mturk_HITId,session.mturk_HITGroupId,session.comment,session.is_demo
+1,dywzy2qf,joe,1,203,203,payment_info,1,PaymentInfo,127.0.0.1,2017-01-11 21:30:33.806252+00:00,0,1,,,1,0.00,1,1,62f00v71,,,,,,,,0
+2,gat21p7t,joe,1,203,203,payment_info,1,PaymentInfo,127.0.0.1,2017-01-11 21:30:33.826824+00:00,0,1,,,2,0.00,1,1,62f00v71,,,,,,,,0
+3,57io6xzm,joe,1,203,203,payment_info,1,PaymentInfo,127.0.0.1,2017-01-11 21:30:33.846290+00:00,0,1,,,3,0.00,1,1,62f00v71,,,,,,,,0
+4,mgxpmc3c,joe,1,203,203,payment_info,1,PaymentInfo,127.0.0.1,2017-01-11 21:30:33.867622+00:00,0,1,,,4,0.00,1,1,62f00v71,,,,,,,,0
+5,ir0dmv92,joe,1,203,203,payment_info,1,PaymentInfo,127.0.0.1,2017-01-11 21:30:33.888110+00:00,0,1,,,5,0.00,1,1,62f00v71,,,,,,,,0
+6,o2ovn95p,joe,1,203,203,payment_info,1,PaymentInfo,127.0.0.1,2017-01-11 21:30:33.911408+00:00,0,1,,,6,0.00,1,1,62f00v71,,,,,,,,0
+7,r7fatehv,joe,1,203,203,payment_info,1,PaymentInfo,127.0.0.1,2017-01-11 21:30:33.931364+00:00,0,1,,,7,0.00,1,1,62f00v71,,,,,,,,0
+8,pumsp3pf,joe,1,203,203,payment_info,1,PaymentInfo,127.0.0.1,2017-01-11 21:30:33.950824+00:00,0,1,,,8,0.00,1,1,62f00v71,,,,,,,,0
+9,mjstq08d,joe,1,203,203,payment_info,1,PaymentInfo,127.0.0.1,2017-01-11 21:30:33.970391+00:00,0,1,,,9,0.00,1,1,62f00v71,,,,,,,,0
+10,wr0xafr2,joe,1,203,203,payment_info,1,PaymentInfo,127.0.0.1,2017-01-11 21:30:33.989669+00:00,0,1,,,10,0.00,1,1,62f00v71,,,,,,,,0
+11,v6l4a5hu,joe,1,203,203,payment_info,1,PaymentInfo,127.0.0.1,2017-01-11 21:30:34.009205+00:00,0,1,,,11,0.00,1,1,62f00v71,,,,,,,,0
+12,8qkw8td1,joe,1,203,203,payment_info,1,PaymentInfo,127.0.0.1,2017-01-11 21:30:34.028614+00:00,0,1,,,12,0.00,1,1,62f00v71,,,,,,,,0
+13,ldw1aj3a,joe,1,203,203,payment_info,1,PaymentInfo,127.0.0.1,2017-01-11 21:30:34.047926+00:00,0,1,,,13,0.00,1,1,62f00v71,,,,,,,,0
+14,zv4drn1z,joe,1,203,203,payment_info,1,PaymentInfo,127.0.0.1,2017-01-11 21:30:34.067204+00:00,0,1,,,14,0.00,1,1,62f00v71,,,,,,,,0
+15,cj93nkf0,joe,1,203,203,payment_info,1,PaymentInfo,127.0.0.1,2017-01-11 21:30:34.087364+00:00,0,1,,,15,0.00,1,1,62f00v71,,,,,,,,0
+16,10knvwly,joe,1,203,203,payment_info,1,PaymentInfo,127.0.0.1,2017-01-11 21:30:34.108954+00:00,0,1,,,16,0.00,1,1,62f00v71,,,,,,,,0
