@@ -45,20 +45,20 @@ In a text editor, open the file venv/bin/activate.  (The venv folder will be loc
 
 
 Reactivate your virtual environment.
-'''
+```
 $ source venv/bin/activate
-'''
+```
 
 
 Install neccessary Python packages to your virtual environment.
-'''
+```
 (venv)$ pip3 install -r requirements_base.txt
-'''
+```
 Check to see that everything worked.
-'''
+```
 (venv)$ otree resetdb
 (venv)$ otree runserver
-'''
+```
 
 The instruction above, are with a Unix or Unix-Based OS in mind.  For troubleshooting or futher reference: http://otree.readthedocs.io/en/latest/install.html.
 
