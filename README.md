@@ -14,9 +14,9 @@ There are two parts to first time setup.  First, setting the project up locally.
 
 ### Local machine setup. 
 
-Copy or pull this repository into an empty directory of your choosing.  Then from your computer's terminal, navigate to the directory. Is you type "ls" into the command prompt, you should see the files like settings.py and manage.py.
+Copy or clone (` git clone git@github.com:seidelj/uchicago_pgg.git . `) this repository into an empty directory on your machine.
 
-Create a virtual environment in the directory.  (pyvenv is a command that comes with Python 3.5.  If the command is not working, check to make sure that your computer's path variable is set to look in wherever Python 3.5 is located.)
+Create a virtual environment in the directory.  First, make sure that you are in the projects root directory. If you enter `ls` you should seed Procfile, public_goods,...,settings.py,...,manage.py,...  Next, enter the commands into your terminal.
 ```
 $ pyvenv venv
 $ source venv/bin/activate
@@ -31,19 +31,11 @@ Deactivate your virtual environment and set some variables.
 
 In a text editor, open the file venv/bin/activate.  (The venv folder will be located in the project's root directory).  A the bottom of the file, add the following lines.
 
-
-    export ADMIN_USERNAME='pick_a_username'
-    export ADMIN_PASSWORD='pick_a_password'
-    #Set this because oTree wants a value, but I don't recall
-    #ever using it
-    export OTREE_ACCESS_CODE='make_something_up'
-    export OTREE_AUTH_LEVEL="DEMO"
-    export OTREE_PRODUCTION='1'
-    #GENERATE ONE http://www.miniwebtool.com/django-secret-key-generator/
-    #DO NOT share
     export SECRET_KEY='your secret key'
-
-
+    #GENERATE A SECRET KEY USING: http://www.miniwebtool.com/django-secret-key-generator/
+    export OTREE_AUTH_LEVEL='STUDY'
+    export OTREE_ADMIN_PASSWORD='password'
+    
 Reactivate your virtual environment.
 ```
 $ source venv/bin/activate
@@ -62,6 +54,11 @@ Check to see that everything worked.
 
 The instruction above, are with a Unix or Unix-Based OS in mind.  For troubleshooting or futher reference: http://otree.readthedocs.io/en/latest/install.html.
 
+### Local machine development.
+
+At this point, you can make any required changes and test them locally, using the the command `otree runserver` and going to http://127.0.0.1:8000/ in any webrowser.  This will be particulary useful if you want to change text displayed to subjects.
+
+(NEED TO ADD INSTRUCTION ABOUT LOCALIZATION HERE)
 
 ### Server set up
 
