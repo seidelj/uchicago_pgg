@@ -67,25 +67,58 @@ Background on getting started with Heroku: https://devcenter.heroku.com/articles
 You only need to get through the first two pages.  I'll pick up from there.
 
 
-Create app at heroku.com.
-#### Under Settings>Reveal Config Variable add the following based on envirnment variables defined in venv/bin/activate
-```
-SECRET_KEY 
-ADMIN_USERNAME
-ADMIN_PASSWORD
-OTREE_ACCESS_CODE
-OTREE_AUTH_LEVEL
-OTREE_PRODUCTION
-```
-install heroku's command line tools.  You'll will want to have you heroku app linked to the directory that contains the code to run the experiment.
-$ heroku git:remote -a your_heroku_apps_name
+Create app at heroku.com.  Once you do this, Heroku will provide instructions on how to deploy.  The Heroku instructions will include a link to download and install the [Heroku CLI](https://devcenter.heroku.com/articles/heroku-cli).  After installing the CLI, you can follow the instructions (they are repeated from Heroku) below.
 
-Provision a database (reade more: https://devcenter.heroku.com/articles/heroku-postgresql#provisioning-the-add-on)
-I recommend standard-0.   When I originally ran this experiment for Luigi et al, I ran into performance issues and errors using a lessor tear.  However, I was using an out-dated version of oTree, the current version may have improved.  If you do try to use a lesser tear, it is at your own risk.
+##### Create a new repository
+```
+(venv)$ heroku login
+(venv)$ git init
+(venv)$ heroku git:remote -a secure-sands-26521
+```
 
-$ heroku addons:create heroku-postgresql:standard-0
-$ heroku pg:wait
-Set up the database
-$ heroku run python manage.py mirgate
+##### Deploy the application
+You can follow this sequence of commands any time you might change the code and want to upload to the server.
+```
+(venv)$ git add .
+(venv)$ git commit -am "first deploy"
+(venv)$ git push heroku master
+```
+
+#### Set config variables and Heroku add-ons
+Although you have deployed your local files to the server, the heroku application will not be working.  If your terminal reports an error deploying, that is also okay for now.
+
+##### Set config varibles.
+```
+(venv)$ heroku config:set OTREE_PRODUCTION=1
+(venv)$ heroku config:set OTREE_AUTH_LEVEL=STUDY
+(venv)$ heroku config:set SECRET_KEY="SECRET KEY FROM venv/bin/activate"
+(venv)$ heroku config:set OTREE_ADMIN_PASSWORD=PASSWORD_FROM_venv/bin/activate
+```
+Now, you should be able to successfully deploy to heroku.
+```
+(venv)$ git push heroku master
+```
+
+##### Install Heroku Redis add-on
+```
+(venv)$ heroku addons:create heroku-redis:hobby-dev
+```
+##### Install Heroku Postgresql add-on
+A note on this:  When I first ran this project I used a much older version of oTree that required a standard-0 tier of postgres.  I will recommend the same, however for those faced with budget constraints, oTree has improved their performance and you may be able to function with a hobby-basic.  I'd certainly pilot or test with some RAs before deciding to use the lesser tier.
+```
+(venv)$ heroku addons:create heroku-postgresql:standard-0
+(venv)$ heroku pg:wait
+```
+Heroku documentations for provisioning databases: [doc](https://devcenter.heroku.com/articles/heroku-postgresql#provisioning-the-add-on).
+##### Initialize otree models to database
+This is a destructive process, don't do this more than once unless you know what you are doing.
+```
+(venv)$ heroku run otree resetdb
+```
+
+#### A few last steps.
+From your heroku apps dashboard, you should uprade your dynos from the resources tab.   In the original experiment, I used 1x Professional Dynos.  Make sure you activate a dyno for the "worker".   Use a lower-tiered dyno at your own risk.
+
+At this point, you are ready to run the experiment in the lab!
 
 
