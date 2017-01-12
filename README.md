@@ -70,17 +70,16 @@ Background on getting started with Heroku: https://devcenter.heroku.com/articles
 You only need to get through the first two pages.  I'll pick up from there.
 
 
-
-
 Create app at heroku.com.
--Under Settings>Reveal Config Variable add the following based on envirnment variables defined above
--- SECRET_KEY 
--- ADMIN_USERNAME
--- ADMIN_PASSWORD
--- OTREE_ACCESS_CODE
--- OTREE_AUTH_LEVEL
--- OTREE_PRODUCTION
-
+#### Under Settings>Reveal Config Variable add the following based on envirnment variables defined in venv/bin/activate
+```
+SECRET_KEY 
+ADMIN_USERNAME
+ADMIN_PASSWORD
+OTREE_ACCESS_CODE
+OTREE_AUTH_LEVEL
+OTREE_PRODUCTION
+```
 install heroku's command line tools.  You'll will want to have you heroku app linked to the directory that contains the code to run the experiment.
 $ heroku git:remote -a your_heroku_apps_name
 
