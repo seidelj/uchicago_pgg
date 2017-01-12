@@ -107,8 +107,15 @@ Now, you should be able to successfully deploy to heroku.
 A note on this:  When I first ran this project I used a much older version of oTree that required a standard-0 tier of postgres.  I will recommend the same, however for those faced with budget constraints, oTree has improved their performance and you may be able to function with a hobby-basic.  I'd certainly pilot or test with some RAs before deciding to use the lesser tier.
 ```
 (venv)$ heroku addons:create heroku-postgresql:standard-0
+Creating heroku-postgresql:standard-0 on ⬢ secure-sands-26521... $50/month
+Your add-on is being provisioned and will be available shortly
+Created postgresql-curved-47346 as HEROKU_POSTGRESQL_CHARCOAL_URL
+
 (venv)$ heroku pg:wait
+(venv)$ heroku pg:promote HEROKU_POSTGRESQL_CHARCOAL
 ```
+In the last command above, replace 'CHARCOAL' with whatever color heroku tells you.
+
 Heroku documentations for provisioning databases: [doc](https://devcenter.heroku.com/articles/heroku-postgresql#provisioning-the-add-on).
 ##### Initialize otree models to database
 This is a destructive process, don't do this more than once unless you know what you are doing.
