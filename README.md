@@ -153,8 +153,8 @@ At this point, you are ready to run the experiment in the lab!
 <br />
 You can monitor the session.
 <br />
-<img scr="https://s3.amazonaws.com/labgames/instructions/monitor.png" width="500" />
+<img src="https://s3.amazonaws.com/labgames/instructions/monitor.png" width="500" />
 <br />
 When all subjects have finished the payments tab will report earnings.  Make sure that the lab monitor refreshes the page before paying each subject.  The values do not update otherwise.
 <br />
-<img scr="https://s3.amazonaws.com/labgames/instructions/payments.png" width="500" />
+<img src="https://s3.amazonaws.com/labgames/instructions/payments.png" width="500" />
