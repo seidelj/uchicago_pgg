@@ -128,4 +128,8 @@ From your heroku apps dashboard, you should uprade your dynos from the resources
 
 At this point, you are ready to run the experiment in the lab!
 
+## Running in the lab.
+
+1. On a computer that will not be used by a subject log in at create a session.
+(Admin Login username is set in settings.py default is admin.  Password is set as an envronment variable `OTREE_ADMIN_PASSWORD`.) 
 
