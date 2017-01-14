@@ -131,5 +131,30 @@ At this point, you are ready to run the experiment in the lab!
 ## Running in the lab.
 
 1. On a computer that will not be used by a subject log in at create a session.
-(Admin Login username is set in settings.py default is admin.  Password is set as an envronment variable `OTREE_ADMIN_PASSWORD`.) 
-
+(Admin Login username is set in settings.py default is admin.  Password is set as an envronment variable `OTREE_ADMIN_PASSWORD`.)
+<br />
+<img src="https://s3.amazonaws.com/labgames/instructions/step1.png" width="500"/>
+<br />
+2. Select "+Create new session"
+<br />
+<img src="https://s3.amazonaws.com/labgames/instructions/step2.png" width="500"/>
+<br />
+3. Select session config.
+<br />
+<img src="https://s3.amazonaws.com/labgames/instructions/step3.png" width="500"/>
+<br />
+4. Enter 16 participants, then click "Create"
+<br />
+<img src="https://s3.amazonaws.com/labgames/instructions/step4.png" width="500"/>
+<br />
+5. Distribute links to the subject's computers.  You can either use the "Session-wide link".  Make sure you enter this link on computers 1 and a time.  If the link is initialized simultaniously on two seperate computers you may end up assiging two players to the same participant session.  OR you can use a unique link on each computer.
+<br />
+<img src="https://s3.amazonaws.com/labgames/instructions/step5.png" width="500"/>
+<br />
+You can monitor the session.
+<br />
+<img scr="https://s3.amazonaws.com/labgames/instructions/monitor.png" width="500" />
+<br />
+When all subjects have finished the payments tab will report earnings.  Make sure that the lab monitor refreshes the page before paying each subject.  The values do not update otherwise.
+<br />
+<img scr="https://s3.amazonaws.com/labgames/instructions/payments.png" width="500" />
