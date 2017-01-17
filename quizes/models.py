@@ -48,6 +48,11 @@ class Group(otree.models.BaseGroup):
 
 class Player(otree.models.BasePlayer):
 
+    TRUE_FALSE_CHOICES = (
+        ('True', 'True'),
+        ('False', 'False'),
+    )
+
     PRIVATE_CHOICES_2 = (
         ("1", "0.45, 0.55, 0.65"),
         ("2", "0.25, 0.35, 0.45"),
@@ -102,26 +107,26 @@ class Player(otree.models.BasePlayer):
     # </built-in>
 
     label = models.CharField()
-    q_first_q1 = models.CharField(initial=None, choices=['True', 'False'], widget=widgets.RadioSelect())
-    q_first_q2 = models.CharField(initial=None, choices=['True', 'False'], widget=widgets.RadioSelect())
-    q_first_q3 = models.CharField(initial=None, choices=['True', 'False'], widget=widgets.RadioSelect())
-    q_first_q4 = models.CharField(initial=None, choices=['True', 'False'], widget=widgets.RadioSelect())
-    q_first_q5 = models.CharField(initial=None, choices=['True', 'False'], widget=widgets.RadioSelect())
-    q_first_q6 = models.CharField(initial=None, choices=['True', 'False'], widget=widgets.RadioSelect())
-    private_2_q1 = models.CharField(initial=None, choices=['True', 'False'], widget=widgets.RadioSelect())
-    private_2_q2 = models.CharField(initial=None, choices=['True', 'False'], widget=widgets.RadioSelect())
-    private_2_q3 = models.CharField(initial=None, choices=['True', 'False'], widget=widgets.RadioSelect())
+    q_first_q1 = models.CharField(initial=None, choices=TRUE_FALSE_CHOICES, widget=widgets.RadioSelect())
+    q_first_q2 = models.CharField(initial=None, choices=TRUE_FALSE_CHOICES, widget=widgets.RadioSelect())
+    q_first_q3 = models.CharField(initial=None, choices=TRUE_FALSE_CHOICES, widget=widgets.RadioSelect())
+    q_first_q4 = models.CharField(initial=None, choices=TRUE_FALSE_CHOICES, widget=widgets.RadioSelect())
+    q_first_q5 = models.CharField(initial=None, choices=TRUE_FALSE_CHOICES, widget=widgets.RadioSelect())
+    q_first_q6 = models.CharField(initial=None, choices=TRUE_FALSE_CHOICES, widget=widgets.RadioSelect())
+    private_2_q1 = models.CharField(initial=None, choices=TRUE_FALSE_CHOICES, widget=widgets.RadioSelect())
+    private_2_q2 = models.CharField(initial=None, choices=TRUE_FALSE_CHOICES, widget=widgets.RadioSelect())
+    private_2_q3 = models.CharField(initial=None, choices=TRUE_FALSE_CHOICES, widget=widgets.RadioSelect())
     private_2_q4 = models.CharField(initial=None, choices=PRIVATE_CHOICES_2, widget=widgets.RadioSelect())
-    private_3_q1 = models.CharField(initial=None, choices=['True', 'False'], widget=widgets.RadioSelect())
+    private_3_q1 = models.CharField(initial=None, choices=TRUE_FALSE_CHOICES, widget=widgets.RadioSelect())
     private_3_q2 = models.CharField(initial=None, choices=PRIVATE_CHOICES_3, widget=widgets.RadioSelect())
-    exact_2_q1 = models.CharField(initial=None, choices=['True', 'False'], widget=widgets.RadioSelect())
-    exact_3_q1 = models.CharField(initial=None, choices=['True', 'False'], widget=widgets.RadioSelect())
-    public_2_q1 = models.CharField(initial=None, choices=['True', 'False'], widget=widgets.RadioSelect())
-    public_2_q2 = models.CharField(initial=None, choices=['True', 'False'], widget=widgets.RadioSelect())
-    public_2_q3 = models.CharField(initial=None, choices=['True', 'False'], widget=widgets.RadioSelect())
+    exact_2_q1 = models.CharField(initial=None, choices=TRUE_FALSE_CHOICES, widget=widgets.RadioSelect())
+    exact_3_q1 = models.CharField(initial=None, choices=TRUE_FALSE_CHOICES, widget=widgets.RadioSelect())
+    public_2_q1 = models.CharField(initial=None, choices=TRUE_FALSE_CHOICES, widget=widgets.RadioSelect())
+    public_2_q2 = models.CharField(initial=None, choices=TRUE_FALSE_CHOICES, widget=widgets.RadioSelect())
+    public_2_q3 = models.CharField(initial=None, choices=TRUE_FALSE_CHOICES, widget=widgets.RadioSelect())
     public_2_q4 = models.CharField(initial=None, choices=PUBLIC_CHOICES_2, widget=widgets.RadioSelect())
-    public_3_q1 = models.CharField(initial=None, choices=['True', 'False'], widget=widgets.RadioSelect())
-    public_3_q2 = models.CharField(initial=None, choices=['True', 'False'], widget=widgets.RadioSelect())
+    public_3_q1 = models.CharField(initial=None, choices=TRUE_FALSE_CHOICES, widget=widgets.RadioSelect())
+    public_3_q2 = models.CharField(initial=None, choices=TRUE_FALSE_CHOICES, widget=widgets.RadioSelect())
     public_3_q3 = models.CharField(initial=None, choices=PUBLIC_CHOICES_3, widget=widgets.RadioSelect())
 
     private_wide_2_q1 = models.CharField(initial=None, choices=['True', 'False'], widget=widgets.RadioSelect())

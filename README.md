@@ -58,7 +58,65 @@ The instruction above, are with a Unix or Unix-Based OS in mind.  For troublesho
 
 At this point, you can make any required changes and test them locally, using the the command `otree runserver` and going to http://127.0.0.1:8000/ in any webrowser.  This will be particulary useful if you want to change text displayed to subjects.
 
-(NEED TO ADD INSTRUCTION ABOUT LOCALIZATION HERE)
+Each oTree application has the file structure
+app_name
+    views.py
+        models.py
+        templates/
+            templates/app_name/
+                SomeName.html
+
+The bulk of text is contained in the .html files.  The files are mostly html with some Django Template variables.  Django template variables and commands are indicated by `{{ varname }}` or `{% some_command %}`.  There is no reason to change these variables within the html.
+
+There are few instances where the views.py file will contain variables that contain text displayed to subjects.  These will appear near the top of the file and begin with an underscore followed by a name in all caps, e.g. `_RESULTS_WAIT_PAGE_BODY_TEXT`.
+
+
+The quizes application requires special attention.
+
+1. QUIZ_KEY.py is a list and dictionary declaration of the questions and answers.  Maintain the integrity of the structures but you may change the text in quotations as needed.
+
+2. Many of the questions are in the form of True False.  If you need to change the language of True/False you can do so by modifying the `TRUE_FALSE_CHOICES` variables in the quizes/models.py.  IMPORTANT: If you change the word to "True" to "Foo" then the correct answer in the QUIZ_KEY.py file must also be changed to "Foo".
+
+Survey application. 
+
+1. In models.py the variables below should be translated accordingly.  Maintaine the integrity of the list structure.
+```
+RACE_CHOICES
+EDUCATION_CHOICES
+HOUSEHOLD_CHOICES
+PROFESSIONAL_CHOICES
+```
+
+2. In models.py the Class Player defines several instance fields prefixed with a `q_`.  Change the verbose_name attribute as necessary.
+
+Risk application.
+1. In the models.py, the class Player contains the following variables.
+
+```
+    GAMBLES = (
+        ('1', "Gamble 1"),
+        ...,
+        ('5', "Gamble 5"),
+    )
+
+    URNS = (
+        ('0', "Black: ? |  White: ?"),
+        ('1', "Black:50% | White:50%"),
+    )
+
+    COLORS = (
+        ('0', "Black"),
+        ('1', "White"),
+    )
+```
+If you need to change these, only change the second values of the tuples within the tuple.  For example
+```
+GAMBLES = (
+    ('1', "Grumble 1"),
+    ...
+    ('5', "Grumble 5"),
+)
+```
 
 ### Server set up
 
