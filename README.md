@@ -2,9 +2,11 @@
 
 # A variant of the public goods game for replication.
 
+This is an [oTree](http://otree.readthedocs.io/en/latest/) project built upon the [Django](https://www.djangoproject.com) web framwork.
+
 ## FIRST TIME SETUP
 
-There are two parts to first time setup.  First, setting the project up locally.  Second, deploying the project to a server.  
+There are two parts to first time setup.  First, [setting the project up locally](#local-machine-setup).  Second, [deploying the project to a server](#server-set-up).  
 
 ### Requirements
 
