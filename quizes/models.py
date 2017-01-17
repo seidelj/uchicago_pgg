@@ -16,7 +16,7 @@ from django.utils import timezone
 author = 'Joe Seidel'
 
 doc = """
-Questions testing comprehension of instructions.
+Questions testing comprehension of instructions.  This data will not be useful because subjects are not allowed to advance unless all questions are answered correctly.
 """
 
 class Constants:
@@ -33,7 +33,8 @@ class Constants:
 
 
 class Subsession(otree.models.BaseSubsession):
-    pass
+
+    app_label = models.CharField(default="quizes")
 
 class Group(otree.models.BaseGroup):
     # <built-in>

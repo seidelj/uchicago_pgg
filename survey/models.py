@@ -66,7 +66,8 @@ class Constants:
 
 
 class Subsession(otree.models.BaseSubsession):
-    pass
+
+    app_label = models.CharField(default="survey")
 
 
 class Group(otree.models.BaseGroup):

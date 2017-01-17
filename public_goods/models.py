@@ -10,7 +10,50 @@ from decimal import *
 # </standard imports>
 
 doc = """
-This is a 4 games of 8 rounds public goods game with 16 players.  Assignment to the group is predetermined.
+This is a 4 games of 8 rounds public goods game with 16 players.
+
+Note on points and payoff:  The subjects are given tokens which are converted to US dollars at the end of the session.  1 token = $.05
+
+Assignment to the group is predetermined.  Row is group for each game.  Add 1 to each number, e.g. player 1 == 0.
+
+Game 1:
+    0, 1, 2, 3,
+    4, 5, 6, 7,
+    8, 9, 10, 11,
+    12, 13, 14, 15,
+
+Game 2:
+    0, 4, 8, 12,
+    1, 5, 9, 13,
+    2, 6, 10, 14,
+    3, 7, 11, 15,
+
+Game 3:
+    0, 5, 10, 15,
+    1, 6, 11, 12,
+    2, 7, 8, 13,
+    3, 4, 9, 14,
+
+Game 4:
+    0, 7, 9, 13,
+    1, 4, 8, 10,
+    2, 5, 11, 12,
+    3, 6, 14, 15,
+
+
+Treatment Dummies:
+
+    Treatment 1: Public Goods Baseline
+    Treatment 2: Public Goods Private Signal
+    Treatment 3: Public Goods Public Signal
+
+
+Order Dummies (mpcr_order):
+
+    Order 1: .25, .55, .95, varied
+    Order 2: .95, .55, .25, varied
+    Order 3: .55, .25, .95, varied
+    Order 4: .25, .95, .55, varied
 
 """
 
@@ -130,17 +173,19 @@ class Subsession(otree.models.BaseSubsession):
     game_round = models.CharField(
         doc="Each game is 8 rounds, this variables tells you which.")
     mpcr_order = models.CharField(
-        doc="Dummy variable for the order of MPRC's seen accross the 4 games a participant plays.  See: github.com/seidelj/uchicago_pgg"
+        doc="Dummy variable for the order of MPRC's seen across the 4 games a participant plays.  See above"
     )
     varied_mpcr_game = models.CharField(
         doc="In one of the 4 games plays, the MPCR is varied each round.  1 if that is happening in the observed round, 0 otherwise"
     )
     treatment = models.CharField(
-        doc="Dummy variable for the treatment of the observed session. See: github.com/seidelj/uchicago_pgg"
+        doc="Dummy variable for the treatment of the observed session. See above"
     )
     signalVariance = models.CharField(
-        doc="Think of this as the size of the signal that a participant observes.  0:exact value; 1:Thin signal; 2:Thick signal;"
+        doc="Think of this as the size of the signal that a participant observes.  0:Exact value; 1:Thin signal; 2:Thick signal;"
     )
+
+    app_label = models.CharField(default="public_goods", doc="the application that produced the observed row")
 
     def get_all_rounds(self):
         qs = type(self).objects.filter(session_id=self.session_id).order_by('round_number')
@@ -254,10 +299,6 @@ class Subsession(otree.models.BaseSubsession):
 
 class Group(otree.models.BaseGroup):
 
-    # <built-in>
-    #subsession = models.ForeignKey(Subsession)
-    # </built-in>
-
     total_contribution = models.DecimalField(max_digits=12, decimal_places=2,
         doc="The aggregate of all member's of a given game's contributions"
     )
@@ -336,12 +377,8 @@ class Group(otree.models.BaseGroup):
         for p in self.get_players():
             p.set_session_payoffs()
 
-class Player(otree.models.BasePlayer):
 
-    # <built-in>
-    #group = models.ForeignKey(Group, null=True)
-    #subsession = models.ForeignKey(Subsession)
-    # </built-in>
+class Player(otree.models.BasePlayer):
 
     treatment = models.IntegerField(
         doc="The player's treatment; identical to subsession.treatment"

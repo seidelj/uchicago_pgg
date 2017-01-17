@@ -16,7 +16,7 @@ from decimal import Decimal
 author = 'Joseph Seidel'
 
 doc = """
-Training module for public goods game.
+Training module for public goods game.  The training is 1 game of 4 rounds.  The mpcr signal is randomly chosen each round.
 """
 
 
@@ -35,6 +35,8 @@ class Constants:
     MPCRS = PgConstants.MPCRS
 
 class Subsession(otree.models.BaseSubsession):
+
+    app_label = models.CharField(default="training")
 
     def get_all_rounds(self):
         qs = type(self).objects.filter(session_id=self.session_id).order_by('round_number')
@@ -71,15 +73,10 @@ class Subsession(otree.models.BaseSubsession):
 
 class Group(otree.models.BaseGroup):
 
-    # <built-in>
-    subsession = models.ForeignKey(Subsession)
-    # </built-in>
+    total_contribution = models.DecimalField(max_digits=12, decimal_places=2, doc="The total amount the group contribted for the round")
+    individual_share = models.DecimalField(max_digits=12, decimal_places=2, doc="The total_contribution divided by 4")
 
-    total_contribution = models.DecimalField(max_digits=12, decimal_places=2)
-    individual_share = models.DecimalField(max_digits=12, decimal_places=2)
-
-    #    efficiency_rate = models.FloatField()
-    efficiency_rate = models.DecimalField(max_digits=12, decimal_places=2)
+    efficiency_rate = models.DecimalField(max_digits=12, decimal_places=2, doc="This is the groups true MPCR")
 
     def old_set_efficiency_rate(self):
         if self.subsession.round_number == 1:
@@ -115,20 +112,15 @@ class Group(otree.models.BaseGroup):
 
 class Player(otree.models.BasePlayer):
 
-    # <built-in>
-    group = models.ForeignKey(Group, null=True)
-    subsession = models.ForeignKey(Subsession)
-    # </built-in>
-
-    treatment = models.IntegerField()
+    treatment = models.IntegerField(doc="The player's treatment; identical to subsession.treatment.  See public_goods doc for description")
     contribution = models.DecimalField(
         min=0, max=Constants.endowment,
         doc="""The amount contributed by the player""",
         max_digits=12, decimal_places=2,
     )
 
-    signal = models.DecimalField(max_digits=12, decimal_places=2)
-    hypothetical_points = models.DecimalField(max_digits=12, decimal_places=2)
+    signal = models.DecimalField(max_digits=12, decimal_places=2, doc="The MPCR observed by the subject for the given round")
+    hypothetical_points = models.DecimalField(max_digits=12, decimal_places=2, doc="The points the subject would recieve if the stakes were real")
 
     def set_signal_value(self):
         mpcr = self.group.efficiency_rate
