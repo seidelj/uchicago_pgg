@@ -158,3 +158,16 @@ You can monitor the session.
 When all subjects have finished the payments tab will report earnings.  Make sure that the lab monitor refreshes the page before paying each subject.  The values do not update otherwise.
 <br />
 <img src="https://s3.amazonaws.com/labgames/instructions/payments.png" width="500" />
+
+
+## Exporting Data
+
+You can download CSV or Excel files containing the data from each session.  There is also useful documentation associated with each app.
+
+1. Click on "Data" in the page heading.
+<br />
+<img src="https://s3.amazonaws.com/labgames/instructions/export1.png" width="500" />
+
+2. Click to download app data and documentation.
+<br />
+<img src="https://s3.amazonaws.com/labgames/instructions/export2.png" width="500" />
