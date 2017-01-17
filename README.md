@@ -10,9 +10,9 @@ There are two parts to first time setup.  First, [setting the project up locally
 
 ### Requirements
 
-1. Python 3.5, oTree provides installation instructions in their documentation: http://otree.readthedocs.io/en/latest/install.html.  Don't worry about installing oTree.  We'll get to that later.
+1. Python 3.5, oTree provides installation instructions in their documentation: http://otree.readthedocs.io/en/latest/install.html.  I'll cover installing oTree in the instructions below.  However, they are written for a Unix or Unix-Based OS, (ie. Ubuntu or Mac OS) in mind.  If you are using windows, the instructions will be a little different in places.  ing or futher reference: http://otree.readthedocs.io/en/latest/install.html.
 
-2. Git (recommended).  A general idea of git and how to use it will be beneficial but it is not absolutely neccessary.  The project is hosted on github so I'll recommend this for anyone who cares: https://help.github.com/articles/set-up-git/
+2. Git.  A general idea of git and how to use it will be beneficial. https://help.github.com/articles/set-up-git/
 
 ### Local machine setup. 
 
@@ -53,8 +53,6 @@ Check to see that everything worked.
 (venv)$ otree resetdb
 (venv)$ otree runserver
 ```
-
-The instruction above, are with a Unix or Unix-Based OS in mind.  For troubleshooting or futher reference: http://otree.readthedocs.io/en/latest/install.html.
 
 ### Local machine development.
 
