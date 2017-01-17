@@ -10,7 +10,7 @@ There are two parts to first time setup.  First, [setting the project up locally
 
 ### Requirements
 
-1. Python 3.5, oTree provides installation instructions in their documentation: http://otree.readthedocs.io/en/latest/install.html.  I'll cover installing oTree in the instructions below.  However, they are written for a Unix or Unix-Based OS, (ie. Ubuntu or Mac OS) in mind.  If you are using windows, the instructions will be a little different in places.  ing or futher reference: http://otree.readthedocs.io/en/latest/install.html.
+1. Python 3.5, oTree provides installation instructions in their documentation: http://otree.readthedocs.io/en/latest/install.html.  I'll cover installing oTree in the instructions below.  However, they are written for a Unix or Unix-Based OS, (ie. Ubuntu or Mac OS) in mind.  If you are using Windows, the instructions might be slightly different in places.  For trouble shooting or futher reference: http://otree.readthedocs.io/en/latest/install.html.
 
 2. Git.  A general idea of git and how to use it will be beneficial. https://help.github.com/articles/set-up-git/
 
@@ -26,7 +26,7 @@ $ source venv/bin/activate
 
 If you are not familiar with virtual environments, the basic idea is that any python packages or environmental variables required will be specific and stored in the same location as this project on your local machine.  If the environment is 'active' you'll see '(venv)' on your terminal's command line. 
 
-Deactivate your virtual environment and set some variables.
+Deactivate your virtual environment and set environment variables.
 ```
 (venv)$ deactivate
 ```
@@ -34,7 +34,7 @@ Deactivate your virtual environment and set some variables.
 In a text editor, open the file venv/bin/activate.  (The venv folder will be located in the project's root directory).  A the bottom of the file, add the following lines.
 
     export SECRET_KEY='your secret key'
-    #GENERATE A SECRET KEY USING: http://www.miniwebtool.com/django-secret-key-generator/
+    #YOU MAY GENERATE A SECRET KEY USING: http://www.miniwebtool.com/django-secret-key-generator/
     export OTREE_AUTH_LEVEL='STUDY'
     export OTREE_ADMIN_PASSWORD='password'
     
