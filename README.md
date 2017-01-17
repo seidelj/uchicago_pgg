@@ -116,6 +116,11 @@ GAMBLES = (
     ...
     ('5', "Grumble 5"),
 )
+
+COLORS = (
+    ('0', "Negro"),
+    ('1', "Blanco"),
+)
 ```
 
 ### Server set up
