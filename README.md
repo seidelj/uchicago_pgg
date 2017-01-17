@@ -4,6 +4,8 @@
 
 This is an [oTree](http://otree.readthedocs.io/en/latest/) project built upon the [Django](https://www.djangoproject.com) web framwork.
 
+As a preface, I've had to rewrite parts of this application as required by the latest version of oTree.  I have tested the application myself locally, however not in a lab setting.  Recent versions of oTree promise better stability and performance however I recommend a pilot to test for any errors I missed.
+
 ## FIRST TIME SETUP
 
 There are two parts to first time setup.  First, [setting the project up locally](#local-machine-setup).  Second, [deploying the project to a server](#server-set-up).  
