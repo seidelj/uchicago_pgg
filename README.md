@@ -73,13 +73,15 @@ The bulk of text is contained in the .html files.  The files are mostly html wit
 There are few instances where the views.py file will contain variables that contain text displayed to subjects.  These will appear near the top of the file and begin with an underscore followed by a name in all caps, e.g. `_RESULTS_WAIT_PAGE_BODY_TEXT`.
 
 
-The quizes application requires special attention.
+In addition to the notes above, the applications quizes, survey, and risk require some special attention.
+
+#### Quizes
 
 1. QUIZ_KEY.py is a list and dictionary declaration of the questions and answers.  Maintain the integrity of the structures but you may change the text in quotations as needed.
 
 2. Many of the questions are in the form of True False.  If you need to change the language of True/False you can do so by modifying the `TRUE_FALSE_CHOICES` variables in the quizes/models.py.  IMPORTANT: If you change the word to "True" to "Foo" then the correct answer in the QUIZ_KEY.py file must also be changed to "Foo".
 
-Survey application. 
+#### Survey 
 
 1. In models.py the variables below should be translated accordingly.  Maintaine the integrity of the list structure.
 ```
@@ -91,7 +93,7 @@ PROFESSIONAL_CHOICES
 
 2. In models.py the Class Player defines several instance fields prefixed with a `q_`.  Change the verbose_name attribute as necessary.
 
-Risk application.
+#### Risk
 1. In the models.py, the class Player contains the following variables.
 
 ```
