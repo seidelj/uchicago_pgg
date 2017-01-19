@@ -51,6 +51,14 @@ class WaitPage(Page):
 class Ambiguity(Page):
     form_model = models.Player
 
+    ambiguityAnswers = {}
+    for x in range(1, 11):
+        urnkey = "amb_choice{}_urn".format(x)
+        colorkey = "amb_choice{}_color".format(x)
+        ambiguityAnswers[urnkey] = "0"
+        ambiguityAnswers[colorkey] = "0"
+    auto_submit_values = ambiguityAnswers
+
     def get_form_fields(self):
         form_fields = []
         for x in range(1, 11):

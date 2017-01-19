@@ -107,7 +107,7 @@ class Group(otree.models.BaseGroup):
         self.total_contribution = sum([p.contribution for p in self.get_players()])
         self.individual_share = self.total_contribution * self.efficiency_rate
         for p in self.get_players():
-            p.round_point = (Constants.endowment - p.contribution) + self.individual_share
+            p.round_points = (Constants.endowment - p.contribution) + self.individual_share
             p.payoff = 0
 
 class Player(otree.models.BasePlayer):
