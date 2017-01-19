@@ -18,7 +18,7 @@ There are two parts to first time setup.  First, [setting the project up locally
 
 ### Local machine setup. 
 
-Copy or clone (` git clone git@github.com:seidelj/uchicago_pgg.git . `) this repository into an empty directory on your machine.
+Copy or clone (` git clone git@github.com:seidelj/uchicago_pgg.git . `) this repository into an empty directory on your machine.  Note the trailing ' . ' in the git clone command indicates to clone into the current directory.
 
 Create a virtual environment in the directory.  First, make sure that you are in the projects root directory. If you enter `ls` you should seed Procfile, public_goods,...,settings.py,...,manage.py,...  Next, enter the commands into your terminal.
 ```
@@ -33,12 +33,12 @@ Deactivate your virtual environment and set environment variables.
 (venv)$ deactivate
 ```
 
-In a text editor, open the file venv/bin/activate.  (The venv folder will be located in the project's root directory).  A the bottom of the file, add the following lines.
+In a text editor, open the file venv/bin/activate.  (The venv folder will be located in the project's root directory).  At the bottom of the file, add the following lines.  You should choose your own value for OTREE_ADMIN_PASSWORD, which will the password used to sign into the administrative portion of the application.
 
     export SECRET_KEY='your secret key'
-    #YOU MAY GENERATE A SECRET KEY USING: http://www.miniwebtool.com/django-secret-key-generator/
+    # YOU MAY GENERATE A SECRET KEY USING: http://www.miniwebtool.com/django-secret-key-generator/
     export OTREE_AUTH_LEVEL='STUDY'
-    export OTREE_ADMIN_PASSWORD='password'
+    export OTREE_ADMIN_PASSWORD='choose a password'
     
 Reactivate your virtual environment.
 ```
@@ -58,22 +58,29 @@ Check to see that everything worked.
 
 ### Local machine development.
 
-At this point, you can make any required changes and test them locally, using the the command `otree runserver` and going to http://127.0.0.1:8000/ in any webrowser.  This will be particulary useful if you want to change text displayed to subjects.
+At this point, you can make any required changes and test them locally, using the the command `otree runserver` and going to http://127.0.0.1:8000/ in any webrowser.  This will be particulary useful if you want to change text displayed to subjects.  If you don't have any changes to make you can skip ahead to [server set up](#server-set-up).
 
 Each oTree application has the file structure
+```
 app_name
     views.py
-        models.py
-        templates/
-            templates/app_name/
-                SomeName.html
+    models.py
+    ...
+    ...
+    templates/app_name/
+        SomeName.html
+```
+The bulk of text is contained in the .html files.  The files are standard html with some Django template variables.  Django template variables and commands are indicated by `{{ varname }}` or `{% some_command %}`.  There is no reason to change django template variables found in the html files.
 
-The bulk of text is contained in the .html files.  The files are mostly html with some Django Template variables.  Django template variables and commands are indicated by `{{ varname }}` or `{% some_command %}`.  There is no reason to change these variables within the html.
+In addition to the template files, there are instances where the views.py file contains variables that are used to display text to subjects.  These will appear near the top of the file and begin with an underscore followed by a name in all caps, e.g. `_RESULTS_WAIT_PAGE_BODY_TEXT`.  These files are
 
-There are few instances where the views.py file will contain variables that contain text displayed to subjects.  These will appear near the top of the file and begin with an underscore followed by a name in all caps, e.g. `_RESULTS_WAIT_PAGE_BODY_TEXT`.
+1. public_goods/views.py
+2. quizes/views.py
+3. risk/views.py
+4. training/views.py
 
 
-In addition to the notes above, the applications quizes, survey, and risk require some special attention.
+In addition to the notes above, the applications: quizes, survey, and risk require additional attention.
 
 #### Quizes
 
@@ -131,17 +138,19 @@ COLORS = (
 
 
 Background on getting started with Heroku: https://devcenter.heroku.com/articles/getting-started-with-python#introduction
-You only need to get through the first two pages.  I'll pick up from there.
+You need only to get through the first two pages.  NOTE: On the introduction page you only need to have a heroku account.  You should already have Python3 installed, which replaces Setuptools, Pip, and Virtualenv.  You will not need postgres installed locally.
 
 
-Create app at heroku.com.  Once you do this, Heroku will provide instructions on how to deploy.  The Heroku instructions will include a link to download and install the [Heroku CLI](https://devcenter.heroku.com/articles/heroku-cli).  After installing the CLI, you can follow the instructions (they are repeated from Heroku) below.
+Create a new app through your heroku.com dashboard.  Once you do this, Heroku will provide instructions on how to deploy.  The Heroku instructions will include a link to download and install the [Heroku CLI](https://devcenter.heroku.com/articles/heroku-cli), incase you have not already( installing the CLI was page of the heroku getting started tutorial linked in the paragraph before this one).
 
 ##### Create a new repository
 ```
 (venv)$ heroku login
 (venv)$ git init
-(venv)$ heroku git:remote -a secure-sands-26521
+(venv)$ heroku git:remote -a your-app-name-10101
 ```
+In the last command above, you should use the heroku app name.  If you don't specify one when creating a new heroku app heroku wil l generate one for you. e.g. `ancient-spire-16403`.
+
 
 ##### Deploy the application
 You can follow this sequence of commands any time you might change the code and want to upload to the server.
@@ -152,7 +161,7 @@ You can follow this sequence of commands any time you might change the code and 
 ```
 
 #### Set config variables and Heroku add-ons
-Although you have deployed your local files to the server, the heroku application will not be working.  If your terminal reports an error deploying, that is also okay for now.
+Although you have deployed your local files to the server, the heroku application will not be working.  Your terminal will report `Push rejected to your-app-name` while trying to deploy to Heroku because configuration variables are missing.
 
 ##### Set config varibles.
 ```
@@ -171,7 +180,7 @@ Now, you should be able to successfully deploy to heroku.
 (venv)$ heroku addons:create heroku-redis:hobby-dev
 ```
 ##### Install Heroku Postgresql add-on
-A note on this:  When I first ran this project I used a much older version of oTree that required a standard-0 tier of postgres.  I will recommend the same, however for those faced with budget constraints, oTree has improved their performance and you may be able to function with a hobby-basic.  I'd certainly pilot or test with some RAs before deciding to use the lesser tier.
+A note on this:  When I first ran this project I used a much older version of oTree that required a standard-0 tier of postgres.  I will recommend the same, however for those faced with budget constraints, oTree has improved their performance and you may be able to function with a hobby-basic tier.  I'd certainly pilot or test with some RAs before deciding to use the lesser tier.
 ```
 (venv)$ heroku addons:create heroku-postgresql:standard-0
 Creating heroku-postgresql:standard-0 on ⬢ secure-sands-26521... $50/month
