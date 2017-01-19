@@ -18,7 +18,7 @@ author = 'Joe'
 doc = """
 Risk game based on Holt and Laury.  Ambiguity game based on mulitple choice list for risk and ambiguity.
 
-In the risk game, player chooses one of the 5 gambles and a coin is "tossed" by the computer.  Payouts are below based on game chosen by player and coin toss.
+In the risk game, player chooses which of the 5 gambles he wants to play, and a coin is "tossed" by the computer.  Payouts are below based on game chosen by player and coin toss.   The amounts are expressed in tokens (points).
 
 Risk Gambles
     Gamble 1: Heads 36, Tails 36
@@ -28,7 +28,7 @@ Risk Gambles
     Gamble 5: 68, 20
 
 
-In the ambiguity game.  Players make 10 choices.  In each choice, they decided which urn to pick from and which color.
+In the ambiguity game.  Players make 10 choices.  In each choice, they decided which urn to pick from and which color. The computer then randomly selects one of the 10 choices, and randomly picks a color.  Players are payed based on the decisions made in that choice.
 
 Urns
     0: ambiguous urn
@@ -110,11 +110,11 @@ class Player(otree.models.BasePlayer):
     risk_choice = models.CharField(initial=None,
         choices=GAMBLES,
         verbose_name="Choose the gamble you to play",
-                doc="The coinflip gamble the subject wants to play"
+            doc="The coinflip gamble the subject wants to play.  Variable takes value 1,...,5 which correspond to     Gamble 1, ..., Gamble 5."
     )
     risk_payoff = models.DecimalField(max_digits=12, decimal_places=2)
 
-    amb_chosen_game = models.CharField(doc="The game chosen by the computer")
+    amb_chosen_game = models.CharField(doc="The game randomly choosen by the computer among the ten available.")
     amb_chosen_ball = models.CharField(doc="The ball chosen by the computer; 0: Black,1: White")
     amb_payoff = models.DecimalField(max_digits=12, decimal_places=2)
     amb_points = models.DecimalField(max_digits=12, decimal_places=2)

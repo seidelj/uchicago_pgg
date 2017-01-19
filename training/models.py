@@ -107,7 +107,7 @@ class Group(otree.models.BaseGroup):
         self.total_contribution = sum([p.contribution for p in self.get_players()])
         self.individual_share = self.total_contribution * self.efficiency_rate
         for p in self.get_players():
-            p.hypothetical_points = (Constants.endowment - p.contribution) + self.individual_share
+            p.round_point = (Constants.endowment - p.contribution) + self.individual_share
             p.payoff = 0
 
 class Player(otree.models.BasePlayer):
@@ -120,7 +120,7 @@ class Player(otree.models.BasePlayer):
     )
 
     signal = models.DecimalField(max_digits=12, decimal_places=2, doc="The MPCR observed by the subject for the given round")
-    hypothetical_points = models.DecimalField(max_digits=12, decimal_places=2, doc="The points the subject would recieve if the stakes were real")
+    round_points = models.DecimalField(max_digits=12, decimal_places=2, doc="This is the total points (tokens) for the subject for a given round. It includes the points from the public good (one forth of the total points present in the public good plus tokens present in the private account).  Notice that points/payoff for any given round will be materially paid to subjects at the end of the experiment only if the game that includes that round is randomly selected for payment.")
 
     def set_signal_value(self):
         mpcr = self.group.efficiency_rate
@@ -166,7 +166,7 @@ class Player(otree.models.BasePlayer):
     def get_game_payoffs(self):
         payoffs = []
         for p in self.in_all_rounds():
-            payoffs.append(p.hypothetical_points)
+            payoffs.append(p.round_points)
 
     def get_round_period(self):
         x = 1

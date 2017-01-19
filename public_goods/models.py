@@ -10,11 +10,15 @@ from decimal import *
 # </standard imports>
 
 doc = """
-This is a 4 games of 8 rounds public goods game with 16 players.
 
-Note on points and payoff:  The subjects are given tokens which are converted to US dollars at the end of the session.  1 token = $.05
+This is a public goods game played by 16 subjects. The experiment is composed by 4 games of 8 rounds each. Players are reassigned to a new group at the end of each game.
 
-Assignment to the group is predetermined.  Row is group for each game.  Add 1 to each number, e.g. player 1 == 0.
+Notice that in the subjects’ instructions "games" are referred to as "periods".
+
+
+Note on points and payoff:  The subjects are given tokens which are converted to US dollars at the end of the session.  1 token = $.05.  Also points and tokens can be used interchangabley.
+
+Assignment to the group is predetermined.  Each row of the matrix is a group.  Add 1 to each number, e.g. player 1 == 0.
 
 Game 1:
     0, 1, 2, 3,
@@ -44,16 +48,16 @@ Game 4:
 Treatment Dummies:
 
     Treatment 1: Public Goods Baseline
-    Treatment 2: Public Goods Private Signal
-    Treatment 3: Public Goods Public Signal
+    Treatment 2: Public Goods Private Signal--Thin
+    Treatment 3: Public Goods Public Signal--Thin
+    Treatment 4: Public Goods Private Signal--Thick
+    Treatment 5: Public Goods Public Signal--Thick
 
 
 Order Dummies (mpcr_order):
 
     Order 1: .25, .55, .95, varied
     Order 2: .95, .55, .25, varied
-    Order 3: .55, .25, .95, varied
-    Order 4: .25, .95, .55, varied
 
 """
 
@@ -168,23 +172,22 @@ class Subsession(otree.models.BaseSubsession):
         doc="0 if the game is a hypothetical round, 1 otherwise"
     )
     game_number = models.CharField(
-        doc="Each player plays 4 games, each against different player.  This variable indicates which is being played."
+        doc="Each player plays 4 games, each against different player.  This variable indicates which is being played. Takes the value 1,2,3,4."
     )
     game_round = models.CharField(
-        doc="Each game is 8 rounds, this variables tells you which.")
+        doc="Each game is 8 rounds, this variables tells you which.  Takes the form 1,2,3,4,5,6,7,8.")
     mpcr_order = models.CharField(
         doc="Dummy variable for the order of MPRC's seen across the 4 games a participant plays.  See above"
     )
-    varied_mpcr_game = models.CharField(
+    variable_mpcr_game = models.CharField(
         doc="In one of the 4 games plays, the MPCR is varied each round.  1 if that is happening in the observed round, 0 otherwise"
+    )
+    fixed_mpcr_game = models.CharField(
+        doc="Dummy variabe for the fixed mpcr signal of the group. 1: .25; 2: .55; 3: .95; It will be blank if the round is varied"
     )
     treatment = models.CharField(
         doc="Dummy variable for the treatment of the observed session. See above"
     )
-    signalVariance = models.CharField(
-        doc="Think of this as the size of the signal that a participant observes.  0:Exact value; 1:Thin signal; 2:Thick signal;"
-    )
-
     app_label = models.CharField(default="public_goods", doc="the application that produced the observed row")
 
     def get_all_rounds(self):
@@ -220,8 +223,24 @@ class Subsession(otree.models.BaseSubsession):
         self.game_number = game_number
         self.game_round = game_round
         self.mpcr_order = self.session.config['mpcrOrder']
-        self.treatment = self.session.config['treatment']
-        self.signalVariance = self.session.config['signalVariance']
+        confTrt = self.session.config['treatment']
+        confSig = self.session.config['signalVariance']
+        if confTrt == 1 and int(confSig) == 0:
+            #baseline
+            self.treatment = 1
+        elif confTrt == 2 and int(confSig) == 1:
+            #Private thin
+            self.treatment = 2
+        elif confTrt == 3 and int(confSig) == 1:
+            #Public thin
+            self.treatment = 3
+        elif confTrt == 2 and int(confSig) == 2:
+            #Private Thick
+            self.treatment = 4
+        elif confTrt == 3 and int(confSig) == 2:
+            #Public Thick
+            self.treatment = 5
+
         self.save()
 
         # Displays order in the logs at creation of session
@@ -233,9 +252,9 @@ class Subsession(otree.models.BaseSubsession):
 
         #Set varied mpcr round for data export
         if self.round_number in range(self.session.vars['varied_round'], self.session.vars['varied_round']+Constants.rounds_per_game):
-            self.varied_mpcr_game = 1
+            self.variable_mpcr_game = 1
         else:
-            self.varied_mpcr_game = 0
+            self.variable_mpcr_game = 0
         self.save()
 
         # Reorder teams in between games
@@ -278,6 +297,15 @@ class Subsession(otree.models.BaseSubsession):
                 newMpcr = self.in_previous_rounds()[-1].get_groups()[0].efficiency_rate
             for group in self.get_groups():
                 group.efficiency_rate = newMpcr
+                if Decimal(newMpcr) == Decimal('0.25'):
+                    dummy = 1
+                elif Decimal(newMpcr) == Decimal('0.55'):
+                    dummy = 2
+                elif Decimal(newMpcr) == Decimal('0.95'):
+                    dummy = 3
+                else:
+                    dummy = 0
+                group.subsession.fixed_mpcr_game = dummy
 
     def set_varying_efficiency_rate(self):
         vr = self.session.vars['varied_round']
@@ -365,10 +393,10 @@ class Group(otree.models.BaseGroup):
         self.total_contribution = sum([p.contribution for p in self.get_players()])
         self.individual_share = self.total_contribution * self.efficiency_rate
         for p in self.get_players():
-            p.hypothetical_points = (Constants.endowment - p.contribution) + self.individual_share
+            p.round_points = (Constants.endowment - p.contribution) + self.individual_share
             if x <= self.subsession.round_number <= x + 7:
-                p.payoff = p.hypothetical_points * self.session.real_world_currency_per_point
-                p.points = p.hypothetical_points
+                p.payoff = p.round_points * self.session.real_world_currency_per_point
+                p.points = p.round_points
             else:
                 p.points = 0
                 p.payoff = 0
@@ -393,11 +421,11 @@ class Player(otree.models.BasePlayer):
     signal = models.DecimalField(max_digits=12, decimal_places=2,
         doc="The signal observed by the player in given round",
     )
-    hypothetical_points = models.DecimalField(max_digits=12, decimal_places=2,
-        doc="The value of group contributions divided by 4 for a given round plus whatever remains from the player's endowment.  This varaible is required by the application when determining payouts because stakes are not always real"
+    round_points = models.DecimalField(max_digits=12, decimal_places=2,
+        doc="This is the total points (tokens) for the subject for a given round. It includes the points from the public good (one forth of the total points present in the public good plus tokens present in the private account).  Notice that points/payoff for any given round will be materially paid to subjects at the end of the experiment only if the game that includes that round is randomly selected for payment."
     )
     points = models.DecimalField(max_digits=12, decimal_places=2,
-        doc="The same as player.hypothetical_points except this only gets populated when stakes are real.  The variable is required by the application when determining payouts because stakes are not always real"
+        doc="The same as round_points except this only gets populated when the paying_game variable is equal to 1.  The variable is required by the application when determining payouts because only one game is selected for actual subject payment."
     )
 
     def set_signal_value(self):
@@ -457,7 +485,7 @@ class Player(otree.models.BasePlayer):
         for p in self.in_all_rounds():
             if p.subsession.round_number in Constants.starting_rounds:
                 payoffs = []
-            payoffs.append(p.hypothetical_points)
+            payoffs.append(p.round_points)
         return sum(payoffs)
 
     def set_session_payoffs(self):

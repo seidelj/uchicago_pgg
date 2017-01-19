@@ -58,7 +58,7 @@ class Results(Page):
     def vars_for_template(self):
         return    {
             'practice': True,
-            'individual_earnings': self.player.hypothetical_points,
+            'individual_earnings': self.player.round_points,
             'treatment': self.session.config['treatment'],
         }
 

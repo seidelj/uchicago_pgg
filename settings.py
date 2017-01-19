@@ -162,7 +162,7 @@ BASE_SESSION_CONFIGS = [
 SESSION_CONFIGS = []
 for baseSession in BASE_SESSION_CONFIGS:
     if baseSession['treatment'] != 4 and baseSession['treatment'] != 5:
-        for x in range(1, 5):
+        for x in range(1, 3):
             session = {}
             session['name'] = "{}_{}".format(baseSession['name'], x)
             session['display_name'] = baseSession['display_name'] + " -- ORDER {}".format(x)
