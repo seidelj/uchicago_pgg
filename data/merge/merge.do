@@ -5,13 +5,14 @@ clear
 *** if using on Windows you will need to change / to \ throughout the .do file
 cd "~/uchicago_pgg/data/merge"
 
-***You can set the session you to merge together here***
+***Set the sessions to be merged together here.  These can be found in Session.code from the ***
+***raw data exported from your appication.***
 local sessions "3syq0vf6 cmdsil8r lz1xgvv5"
 
 // **NOTE** the files must follow a directory hiearchy of
-//	<dir>/out
+//  <dir>/out
 //  <dir>/temp
-//	<dir>/3syq0vf6
+//  <dir>/3syq0vf6
 //		<file>3syq0vf6_risk.csv
 //		<file>3syq0vf6_training.csv
 //		<file>3syq0vf6_pg.csv
