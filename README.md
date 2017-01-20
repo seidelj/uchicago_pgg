@@ -168,7 +168,7 @@ Although you have deployed your local files to the server, the heroku applicatio
 (venv)$ heroku config:set OTREE_PRODUCTION=1
 (venv)$ heroku config:set OTREE_AUTH_LEVEL=STUDY
 (venv)$ heroku config:set SECRET_KEY="SECRET KEY FROM venv/bin/activate"
-(venv)$ heroku config:set OTREE_ADMIN_PASSWORD=PASSWORD_FROM_venv/bin/activate
+(venv)$ heroku config:set OTREE_ADMIN_PASSWORD="password_from_venv/bin/activate"
 ```
 Now, you should be able to successfully deploy to heroku.
 ```
@@ -197,6 +197,11 @@ Heroku documentations for provisioning databases: [doc](https://devcenter.heroku
 This is a destructive process, don't do this more than once unless you know what you are doing.
 ```
 (venv)$ heroku run otree resetdb
+```
+
+#### Open your heroku application
+```
+(venv)$ heroku open
 ```
 
 #### A few last steps.
