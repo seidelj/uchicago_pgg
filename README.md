@@ -268,5 +268,5 @@ You can download CSV or Excel files containing the data from each session.  Ther
 
 ## More on data
 
-Included in this repository is a Stata do file: `data/merge/merge.do`.  It will combine the data exported from the website into a .dta and .csv file for analysis.  Follow the instructions in the comments at the beginning of the .do file.  The file is currently set up with a working example using data created by robots.
+Included in this repository is a Stata do file: `data/merge/merge.do`.  It will combine the data exported from the website into a .dta and .csv file for analysis.  It will also remove variables that aren't useful for academic purposes.  Follow the instructions in the comments at the beginning of the .do file.  The file is currently set up with a working example using data created by robots.
 
