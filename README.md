@@ -256,7 +256,7 @@ When all subjects have finished the payments tab will report earnings.  Make sur
 
 ## Exporting Data
 
-You can download CSV or Excel files containing the data from each session.  There is also useful documentation associated with each app.  The documentation found from the links seen in the example below will detail fields from the entirity of the SQL tables.  Most people will find this version of the data and documentation excessive.  See [below])(#more-on-data).
+You can download CSV or Excel files containing the data from each session.  There is also useful documentation associated with each app.  The documentation found from the links seen in the example below will detail fields from the entirity of the SQL tables.  Most people will find this version of the data and documentation excessive.  See [below](#more-on-data).
 
 1. Click on "Data" in the page heading.
 <br />
