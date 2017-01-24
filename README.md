@@ -4,7 +4,7 @@
 
 This is an [oTree](http://otree.readthedocs.io/en/latest/) project built upon the [Django](https://www.djangoproject.com) web framwork.
 
-As a preface, I've rewritten parts of this application as required by the latest version of oTree.  I have tested the application myself locally, however not in a lab setting.  Recent versions of oTree promise better stability and performance however I recommend a pilot to test for any errors I missed.
+As a preface, I've rewritten parts of this application as required by the latest version of oTree.  I have tested the application myself locally, but not in a lab setting (e.g. with subjects all playing at once).  Recent versions of oTree promise better stability and performance, however I recommend a pilot to make sure things will run smoothly.
 
 ## FIRST TIME SETUP
 
@@ -12,28 +12,40 @@ There are two parts to first time setup.  First, [setting the project up locally
 
 ### Requirements
 
-1. Python 3.5, oTree provides installation instructions in their documentation: http://otree.readthedocs.io/en/latest/install.html.  I'll cover installing oTree in the instructions below.  However, they are written for a Unix or Unix-Based OS, (ie. Ubuntu or Mac OS) in mind.  If you are using Windows, the instructions might be slightly different in places.  For trouble shooting or futher reference: http://otree.readthedocs.io/en/latest/install.html.
+1. Python 3.5. oTree provides installation instructions in their documentation: http://otree.readthedocs.io/en/latest/install.html.  I'll cover installing 'oTree' in the instructions below.  However, my instructions are written for a Unix or Unix-Based OS (e.g. Ubuntu or Mac OS).  If you are using Windows, the instructions might be slightly different in places.  For trouble shooting or futher reference: http://otree.readthedocs.io/en/latest/install.html.
 
 2. Git.  A general idea of git and how to use it will be beneficial. https://help.github.com/articles/set-up-git/
 
 ### Local machine setup. 
 
-Copy or clone (` git clone git@github.com:seidelj/uchicago_pgg.git . `) this repository into an empty directory on your machine.  Note the trailing ' . ' in the git clone command indicates to clone into the current directory.
+Copy or clone (` git clone git@github.com:seidelj/uchicago_pgg.git . `) this repository into an empty directory on your machine.  Note the trailing ' . ' in the `git clone` command indicates to clone into the current directory, don't forget it!
 
-Create a virtual environment in the directory.  First, make sure that you are in the projects root directory. If you enter `ls` you should seed Procfile, public_goods,...,settings.py,...,manage.py,...  Next, enter the commands into your terminal.
+Create a virtual environment in the directory.  First, make sure that you are in the project's root directory. If you enter `ls` you should see something very similiar to
+```
+(venv) wireless-s1-so-150-56-217:uchicago_pgg joseph$  ls
+Procfile		manage.py		        risk
+README.md		payment_info		    runtime.txt
+__pycache__		public_goods		    settings.py
+_static			quizes			        survey
+_templates		requirements.txt	    training
+data			requirements_base.txt	
+db.sqlite3		requirements_heroku.txt
+```
+
+Next, enter the commands into your terminal.
 ```
 $ pyvenv venv
 $ source venv/bin/activate
 ```
 
-If you are not familiar with virtual environments, the basic idea is that any python packages or environmental variables required will be specific and stored in the same location as this project on your local machine.  If the environment is 'active' you'll see '(venv)' on your terminal's command line. 
+If you are not familiar with virtual environments, the basic idea is that any python packages or environmental variables required for this application will be specific and stored in the same location as this project on your local machine.  If the environment is 'active' you'll see '(venv)' on your terminal's command line. 
 
-Deactivate your virtual environment and set environment variables.
+Deactivate your virtual environment and set the required environment variables.
 ```
 (venv)$ deactivate
 ```
 
-In a text editor, open the file venv/bin/activate.  (The venv folder will be located in the project's root directory).  At the bottom of the file, add the following lines.  You should choose your own value for OTREE_ADMIN_PASSWORD, which will the password used to sign into the administrative portion of the application.
+In a text editor, open the file venv/bin/activate.  (The venv folder was created when you ran the command `pyvenv venv`.  It will be located in the project's root directory).  At the bottom of the file, add the following lines.  You should choose your own value for OTREE_ADMIN_PASSWORD, which will the password used to sign into the administrative portion of the application.
 
     export SECRET_KEY='your secret key'
     # YOU MAY GENERATE A SECRET KEY USING: http://www.miniwebtool.com/django-secret-key-generator/
@@ -58,7 +70,7 @@ Check to see that everything worked.
 
 ### Local machine development.
 
-At this point, you can make any required changes and test them locally, using the the command `otree runserver` and going to http://127.0.0.1:8000/ in any webrowser.  This will be particulary useful if you want to change text displayed to subjects.  If you don't have any changes to make you can skip ahead to [server set up](#server-set-up).
+At this point, you can make any required changes and test them locally by using the the command `otree runserver` and going to http://127.0.0.1:8000/ in a web browser.  The only required changes would be those relating to localization.  If your subjects read and speak english you can skip ahead to [server set up](#server-set-up).
 
 Each oTree application has the file structure
 ```
@@ -90,7 +102,7 @@ In addition to the notes above, the applications: quizes, survey, and risk requi
 
 #### Survey 
 
-1. In models.py the variables below should be translated accordingly.  Maintaine the integrity of the list structure.
+1. In models.py the variables below should be translated accordingly.  Maintain the integrity of the list structure.
 ```
 RACE_CHOICES
 EDUCATION_CHOICES
@@ -98,10 +110,10 @@ HOUSEHOLD_CHOICES
 PROFESSIONAL_CHOICES
 ```
 
-2. In models.py the Class Player defines several instance fields prefixed with a `q_`.  Change the verbose_name attribute as necessary.
+2. In models.py the Python class 'Player' defines several instance fields prefixed with a `q_`.  Change the verbose_name attribute as necessary.
 
 #### Risk
-1. In the models.py, the class Player contains the following variables.
+1. In the models.py, the Python class Player contains the following variables.
 
 ```
     GAMBLES = (
@@ -138,10 +150,10 @@ COLORS = (
 
 
 Background on getting started with Heroku: https://devcenter.heroku.com/articles/getting-started-with-python#introduction
-You need only to get through the first two pages.  NOTE: On the introduction page you only need to have a heroku account.  You should already have Python3 installed, which replaces Setuptools, Pip, and Virtualenv.  You will not need postgres installed locally.
+You need only to get through the first two pages.  NOTE: On the introduction page you only need to have a heroku account.  You should already have Python3 installed, which replaces the need for Setuptools, Pip, and Virtualenv.  You will not need postgres installed locally.
 
 
-Create a new app through your heroku.com dashboard.  Once you do this, Heroku will provide instructions on how to deploy.  The Heroku instructions will include a link to download and install the [Heroku CLI](https://devcenter.heroku.com/articles/heroku-cli), incase you have not already( installing the CLI was page of the heroku getting started tutorial linked in the paragraph before this one).
+Create a new app through your heroku.com dashboard.  Once you do this, Heroku will provide instructions on how to deploy.  The Heroku instructions will include a link to download and install the [Heroku CLI](https://devcenter.heroku.com/articles/heroku-cli), incase you have not already (installing the CLI was included in Heroku's getting started tutorial linked in the paragraph before this one).
 
 ##### Create a new repository
 ```
@@ -149,7 +161,7 @@ Create a new app through your heroku.com dashboard.  Once you do this, Heroku wi
 (venv)$ git init
 (venv)$ heroku git:remote -a your-app-name-10101
 ```
-In the last command above, you should use the heroku app name.  If you don't specify one when creating a new heroku app heroku wil l generate one for you. e.g. `ancient-spire-16403`.
+In the last command above, you should use your Heroku app's name.  If you don't specify one when creating a new heroku app heroku will generate one for you. e.g. `ancient-spire-16403`.
 
 
 ##### Deploy the application
@@ -180,7 +192,7 @@ Now, you should be able to successfully deploy to heroku.
 (venv)$ heroku addons:create heroku-redis:hobby-dev
 ```
 ##### Install Heroku Postgresql add-on
-A note on this:  When I first ran this project I used a much older version of oTree that required a standard-0 tier of postgres.  I will recommend the same, however for those faced with budget constraints, oTree has improved their performance and you may be able to function with a hobby-basic tier.  I'd certainly pilot or test with some RAs before deciding to use the lesser tier.
+A note on this:  When I first ran this project I used a much older version of oTree that required a standard-0 tier of postgres.  I will recommend the same.  However, for those faced with budget constraints, oTree claims to have improved their performance and you may be able to function with a hobby-basic tier.  I'd certainly pilot or test with some RAs before deciding to use the lesser tier.
 ```
 (venv)$ heroku addons:create heroku-postgresql:standard-0
 Creating heroku-postgresql:standard-0 on ⬢ secure-sands-26521... $50/month
@@ -192,9 +204,10 @@ Created postgresql-curved-47346 as HEROKU_POSTGRESQL_CHARCOAL_URL
 ```
 In the last command above, replace 'CHARCOAL' with whatever color heroku tells you.
 
-Heroku documentations for provisioning databases: [doc](https://devcenter.heroku.com/articles/heroku-postgresql#provisioning-the-add-on).
+Further reading, but not required: Heroku documentation for provisioning databases: [doc](https://devcenter.heroku.com/articles/heroku-postgresql#provisioning-the-add-on).
+
 ##### Initialize otree models to database
-This is a destructive process, don't do this more than once unless you know what you are doing.
+This is a destructive process, don't do this more than once unless you know what you are doing.  For example, if you have generated data in the lab using the application, this command will destroy that data from the database.
 ```
 (venv)$ heroku run otree resetdb
 ```
@@ -205,7 +218,7 @@ This is a destructive process, don't do this more than once unless you know what
 ```
 
 #### A few last steps.
-From your heroku apps dashboard, you should uprade your dynos from the resources tab.   In the original experiment, I used 1x Professional Dynos.  Make sure you activate a dyno for the "worker".   Use a lower-tiered dyno at your own risk.
+From your Heroku apps dashboard at heroku.com, you should uprade your dynos using the resources tab.   In the original experiment, I used 1x Professional Dynos.  Make sure you activate a dyno for the "worker".   Use a lower-tiered dyno at your own risk as it could affect performance.
 
 At this point, you are ready to run the experiment in the lab!
 
@@ -228,7 +241,7 @@ At this point, you are ready to run the experiment in the lab!
 <br />
 <img src="https://s3.amazonaws.com/labgames/instructions/step4.png" width="500"/>
 <br />
-5. Distribute links to the subject's computers.  You can either use the "Session-wide link".  Make sure you enter this link on computers 1 and a time.  If the link is initialized simultaniously on two seperate computers you may end up assiging two players to the same participant session.  OR you can use a unique link on each computer.
+5. Distribute links to the subject's computers.  You can use the "Session-wide link".  Make sure you enter this link on computers 1 and a time.  If the link is initialized simultaniously on two seperate computers you may end up assiging two players to the same participant session.  OR you can use a unique link on each computer.
 <br />
 <img src="https://s3.amazonaws.com/labgames/instructions/step5.png" width="500"/>
 <br />
@@ -243,7 +256,7 @@ When all subjects have finished the payments tab will report earnings.  Make sur
 
 ## Exporting Data
 
-You can download CSV or Excel files containing the data from each session.  There is also useful documentation associated with each app.
+You can download CSV or Excel files containing the data from each session.  There is also useful documentation associated with each app.  The documentation found from the links seen in the example below will detail fields from the entirity of the SQL tables.  Most people will find this version of the data and documentation excessive.  See [below])(#more-on-data).
 
 1. Click on "Data" in the page heading.
 <br />
