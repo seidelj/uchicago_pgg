@@ -11,7 +11,7 @@
 			{% endfor %}
 		</tr>
 		<tr>
-			<td>{{ player.participant.id }}(You)</td>
+			<td>{{ player.participant.id_in_session }}(You)</td>
 			{% for x in table_headers %}
 				{% if x >= player.get_signal_values.left and x <= player.get_signal_values.right %}
 			<td class="success">{% if x == player.signal %}{{ player.signal }}{% endif %}</td>
@@ -22,7 +22,7 @@
 		</tr>
 		{% for p in player.get_others_in_group %}
 		<tr>
-			<td>{{ p.participant.id }}</td>
+			<td>{{ p.participant.id_in_session }}</td>
 			{% for x in table_headers %}
 				{% if x >= p.get_signal_values.left and x <= p.get_signal_values.right %}
 			<td {% if treatment == 3 %}class="success"{% endif %}> {% if x == p.signal and treatment == 3 %}{{ p.signal }}{% endif %}</td>

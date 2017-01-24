@@ -11,7 +11,7 @@
 			{% endfor %}
 		</tr>
 		<tr>
-			<td>{{ player.participant.id }} (You)</td>
+			<td>{{ player.participant.id_in_session }} (You)</td>
 			{% for x in table_headers %}
 				{% if x == group.efficiency_rate %}
 			<td class="success">{{ group.efficiency_rate }} </td>
@@ -22,7 +22,7 @@
 		</tr>
 		{% for p in player.get_others_in_group %}
 		<tr>
-			<td>{{ p.participant.id }}</td>
+			<td>{{ p.participant.id_in_session }}</td>
 						{% for x in table_headers %}
 				{% if x == group.efficiency_rate %}
 			<td class="success">{{ group.efficiency_rate }}</td>
