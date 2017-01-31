@@ -38,14 +38,14 @@ $ pyvenv venv
 $ source venv/bin/activate
 ```
 
-If you are not familiar with virtual environments, the basic idea is that any python packages or environmental variables required for this application will be specific and stored in the same location as this project on your local machine.  If the environment is 'active' you'll see '(venv)' on your terminal's command line. 
+If you are not familiar with virtual environments, the basic idea is to avoid this application's dependencies interfering with any other Python applications on your machine.  Similarly, it will keep any future Python applications you install from interfering with this application.  If the environment is 'active' you'll see '(venv)' on your terminal's command line. 
 
 Deactivate your virtual environment and set the required environment variables.
 ```
 (venv)$ deactivate
 ```
 
-In a text editor, open the file venv/bin/activate.  (The venv folder was created when you ran the command `pyvenv venv`.  It will be located in the project's root directory).  At the bottom of the file, add the following lines.  You should choose your own value for OTREE_ADMIN_PASSWORD, which will the password used to sign into the administrative portion of the application.
+In a text editor, open the file venv/bin/activate, which was created when you ran `pyvenv venv`.  At the bottom of the file, add the following lines.  You should choose your own value for OTREE_ADMIN_PASSWORD, which will the password used to sign into the administrative portion of the application.
 
     export SECRET_KEY='your secret key'
     # YOU MAY GENERATE A SECRET KEY USING: http://www.miniwebtool.com/django-secret-key-generator/
@@ -70,7 +70,7 @@ Check to see that everything worked.
 
 ### Local machine development.
 
-At this point, you can make any required changes and test them locally by using the the command `otree runserver` and going to http://127.0.0.1:8000/ in a web browser.  The only required changes would be those relating to localization.  If your subjects read and speak english you can skip ahead to [server set up](#server-set-up).
+At this point, you can make any required changes and test them locally by using the the command `otree runserver` and observing them at http://127.0.0.1:8000/ in a web browser.  The only required changes would be those relating to localization.  If your subjects will be participating in the English language, you can skip ahead to [server set up](#server-set-up).
 
 Each oTree application has the file structure
 ```
@@ -148,12 +148,14 @@ COLORS = (
 
 ### Server set up
 
+In order to access this application through a website, you'll need to set this application up on a web server.  I have written instructions for Heroku.  The [oTree documentation](http://otree.readthedocs.io/en/latest/server/intro.html) also has instructions for Heroku and a couple other options.
 
-Background on getting started with Heroku: https://devcenter.heroku.com/articles/getting-started-with-python#introduction
-You need only to get through the first two pages.  NOTE: On the introduction page you only need to have a heroku account.  You should already have Python3 installed, which replaces the need for Setuptools, Pip, and Virtualenv.  You will not need postgres installed locally.
+There are three steps I won't cover in detail 
+1.  Creating an [account](https://signup.heroku.com/dc) with Heroku
+2.  Installing the [Heroku CLI](https://devcenter.heroku.com/articles/heroku-cli)
+3.  Create a new app through your Heroku dashboard.
 
-
-Create a new app through your heroku.com dashboard.  Once you do this, Heroku will provide instructions on how to deploy.  The Heroku instructions will include a link to download and install the [Heroku CLI](https://devcenter.heroku.com/articles/heroku-cli), incase you have not already (installing the CLI was included in Heroku's getting started tutorial linked in the paragraph before this one).
+Once a new Heroku app has been created, Heroku will provide instructions on how to deploy or you can follow my instructions below.  The commands below should be done from the root directory of your project, same as the commands preceding.
 
 ##### Create a new repository
 ```
@@ -165,7 +167,7 @@ In the last command above, you should use your Heroku app's name.  If you don't 
 
 
 ##### Deploy the application
-You can follow this sequence of commands any time you might change the code and want to upload to the server.
+You can follow this sequence of commands any time you might change the code and want to upload it to the server.
 ```
 (venv)$ git add .
 (venv)$ git commit -am "first deploy"
@@ -182,7 +184,7 @@ Although you have deployed your local files to the server, the heroku applicatio
 (venv)$ heroku config:set SECRET_KEY="SECRET KEY FROM venv/bin/activate"
 (venv)$ heroku config:set OTREE_ADMIN_PASSWORD="password_from_venv/bin/activate"
 ```
-Now, you should be able to successfully deploy to heroku.
+Now, you should be able to successfully deploy to Heroku.
 ```
 (venv)$ git push heroku master
 ```
@@ -192,7 +194,8 @@ Now, you should be able to successfully deploy to heroku.
 (venv)$ heroku addons:create heroku-redis:hobby-dev
 ```
 ##### Install Heroku Postgresql add-on
-A note on this:  When I first ran this project I used a much older version of oTree that required a standard-0 tier of postgres.  I will recommend the same.  However, for those faced with budget constraints, oTree claims to have improved their performance and you may be able to function with a hobby-basic tier.  I'd certainly pilot or test with some RAs before deciding to use the lesser tier.
+A note on this:  When I first ran this project I used a much older version of oTree that required a standard-0 tier of postgres.  I will recommend the same.  However, for those faced with budget constraints, oTree claims to have improved their performance and you may be able to function with a hobby-basic tier.  I'd certainly pilot or test with some RAs before deciding to use the lesser tier. 
+
 ```
 (venv)$ heroku addons:create heroku-postgresql:standard-0
 Creating heroku-postgresql:standard-0 on ⬢ secure-sands-26521... $50/month
@@ -202,12 +205,12 @@ Created postgresql-curved-47346 as HEROKU_POSTGRESQL_CHARCOAL_URL
 (venv)$ heroku pg:wait
 (venv)$ heroku pg:promote HEROKU_POSTGRESQL_CHARCOAL
 ```
-In the last command above, replace 'CHARCOAL' with whatever color heroku tells you.
+In the last command above, replace 'CHARCOAL' with whatever color Heroku assigns to your database.
 
 Further reading, but not required: Heroku documentation for provisioning databases: [doc](https://devcenter.heroku.com/articles/heroku-postgresql#provisioning-the-add-on).
 
 ##### Initialize otree models to database
-This is a destructive process, don't do this more than once unless you know what you are doing.  For example, if you have generated data in the lab using the application, this command will destroy that data from the database.
+This is a destructive process, don't do this more than once unless you know what you are doing.  For example, if you have generated data in the lab using the application, this command will destroy that data from the remote database.
 ```
 (venv)$ heroku run otree resetdb
 ```
@@ -218,7 +221,7 @@ This is a destructive process, don't do this more than once unless you know what
 ```
 
 #### A few last steps.
-From your Heroku apps dashboard at heroku.com, you should uprade your dynos using the resources tab.   In the original experiment, I used 1x Professional Dynos.  Make sure you activate a dyno for the "worker".   Use a lower-tiered dyno at your own risk as it could affect performance.
+From your Heroku apps dashboard at heroku.com, you should uprade your dynos using the resources tab.   In the original experiment, I used 1x Professional Dynos.  Make sure you activate a dyno for the "worker".   Use a lower-tiered dyno at your own risk as it could affect performance.   Also, you can easily turn 'dynos' on and off through the Heroku dashboard when the application is not in use and you'll only be charged for when they are in use.
 
 At this point, you are ready to run the experiment in the lab!
 
