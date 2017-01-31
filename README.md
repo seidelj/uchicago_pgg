@@ -252,7 +252,7 @@ You can monitor the session.
 <br />
 <img src="https://s3.amazonaws.com/labgames/instructions/monitor.png" width="500" />
 <br />
-When all subjects have finished the payments tab will report earnings.  Make sure that the lab monitor refreshes the page before paying each subject.  The values do not update otherwise.
+The payment tab will report subjects earnings for study.  Payment values update as subject progress through the experiment, however the value will not be displayed on the payment info page without a page refresh.  The reason I mention this is because sometimes subjects will mention they are being paid less than what got reported on their screen.  Refreshing the page will rememedy discrepancy.
 <br />
 <img src="https://s3.amazonaws.com/labgames/instructions/payments.png" width="500" />
 
