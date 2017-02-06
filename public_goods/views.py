@@ -45,12 +45,6 @@ class Results(Page):
         if self.subsession.round_number == Constants.num_rounds:
             self.player.set_session_payoffs()
 
-    def vars_for_template(self):
-        return {
-            'total_earnings': self.group.total_contribution * self.group.efficiency_rate,
-            'individual_earnings': self.player.round_points,
-            'treatment': self.session.config['treatment'],
-        }
 
 class ResultsSummary(Page):
 
@@ -73,11 +67,8 @@ class ResultsSummary(Page):
 
             return {
                 'varied': varied,
-                'treatment': self.session.config['treatment'],
                 'info': self.player.get_game_info(),
                 'payoff' : self.player.get_game_payoffs(),
-                'paying_round': paying_round,
-                'total_payoff': sum([p.payoff for p in self.player.in_all_rounds()]),
             }
 
 class NewGame(Page):
