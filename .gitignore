@@ -7,4 +7,5 @@ staticfiles
 *.sqlite3
 _coverage_results/
 .DS_Store
+data/merge/temp
 
