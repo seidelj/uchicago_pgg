@@ -4,7 +4,7 @@
 
 This is an [oTree](http://otree.readthedocs.io/en/latest/) project built upon the [Django](https://www.djangoproject.com) web framwork.
 
-As a preface, I've rewritten parts of this application as required by the latest version of oTree.  I have tested the application myself locally, but not in a lab setting (e.g. with subjects all playing at once).  Recent versions of oTree promise better stability and performance, however I recommend a pilot to make sure things will run smoothly.
+The version of this code used in the original paper has been updated and rewritten in parts as required by the latest version of oTree.  I have tested the application locally and with bots on a remote server but not in a lab setting (e.g. with subjects all playing at once).  Recent versions of oTree promise better stability and performance, however I recommend a pilot to make sure things will run smoothly.
 
 ## FIRST TIME SETUP
 
