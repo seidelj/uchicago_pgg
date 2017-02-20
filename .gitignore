@@ -8,4 +8,4 @@ staticfiles
 _coverage_results/
 .DS_Store
 data/merge/temp
-
+*.csv
