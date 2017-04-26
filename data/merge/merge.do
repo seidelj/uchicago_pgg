@@ -7,7 +7,7 @@ cd "~/uchicago_pgg/data/merge"
 
 ***Set the sessions to be merged together here.  These can be found in Session.code from the ***
 ***raw data exported from your appication.***
-local sessions "3syq0vf6 cmdsil8r lz1xgvv5 b1n8pl1s"
+local sessions "3syq0vf6 cmdsil8r lz1xgvv5 b1n8pl1s 2cd4524j 3aq6dyc3 07q8q19s 63a59oes 99onw02o ptorykjm ut43ysr8 xaqzbf9p" 
 
 // **NOTE** the files must follow a directory hiearchy of
 //  <dir>/out
