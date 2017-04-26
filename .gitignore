@@ -9,3 +9,4 @@ _coverage_results/
 .DS_Store
 data/merge/temp
 *.csv
+*.dta
