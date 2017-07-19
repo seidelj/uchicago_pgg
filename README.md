@@ -230,31 +230,31 @@ At this point, you are ready to run the experiment in the lab!
 1. On a computer that will not be used by a subject log in at create a session.
 (Admin Login username is set in settings.py default is admin.  Password is set as an envronment variable `OTREE_ADMIN_PASSWORD`.)
 <br />
-<img src="https://s3.amazonaws.com/labgames/instructions/step1.png" width="500"/>
+<img src="https://s3.amazonaws.com/labgames2/instructions/step1.png" width="500"/>
 <br />
 2. Select "+Create new session"
 <br />
-<img src="https://s3.amazonaws.com/labgames/instructions/step2.png" width="500"/>
+<img src="https://s3.amazonaws.com/labgames2/instructions/step2.png" width="500"/>
 <br />
 3. Select session config.
 <br />
-<img src="https://s3.amazonaws.com/labgames/instructions/step3.png" width="500"/>
+<img src="https://s3.amazonaws.com/labgames2/instructions/step3.png" width="500"/>
 <br />
 4. Enter 16 participants, then click "Create"
 <br />
-<img src="https://s3.amazonaws.com/labgames/instructions/step4.png" width="500"/>
+<img src="https://s3.amazonaws.com/labgames2/instructions/step4.png" width="500"/>
 <br />
 5. Distribute links to the subject's computers.  You can use the "Session-wide link".  Make sure you enter this link on computers 1 and a time.  If the link is initialized simultaniously on two seperate computers you may end up assiging two players to the same participant session.  OR you can use a unique link on each computer.
 <br />
-<img src="https://s3.amazonaws.com/labgames/instructions/step5.png" width="500"/>
+<img src="https://s3.amazonaws.com/labgames2/instructions/step5.png" width="500"/>
 <br />
 You can monitor the session.
 <br />
-<img src="https://s3.amazonaws.com/labgames/instructions/monitor.png" width="500" />
+<img src="https://s3.amazonaws.com/labgames2/instructions/monitor.png" width="500" />
 <br />
 The payment tab will report subjects earnings for study.  Payment values update as subject progress through the experiment, however the value will not be displayed on the payment info page without a page refresh.  The reason I mention this is because sometimes subjects will mention they are being paid less than what got reported on their screen.  Refreshing the page will rememedy discrepancy.
 <br />
-<img src="https://s3.amazonaws.com/labgames/instructions/payments.png" width="500" />
+<img src="https://s3.amazonaws.com/labgames2/instructions/payments.png" width="500" />
 
 
 ## Exporting Data
@@ -263,11 +263,11 @@ You can download CSV or Excel files containing the data from each session.  Ther
 
 1. Click on "Data" in the page heading.
 <br />
-<img src="https://s3.amazonaws.com/labgames/instructions/export1.png" width="500" />
+<img src="https://s3.amazonaws.com/labgames2/instructions/export1.png" width="500" />
 
 2. Click to download app data and documentation.
 <br />
-<img src="https://s3.amazonaws.com/labgames/instructions/export2.png" width="500" />
+<img src="https://s3.amazonaws.com/labgames2/instructions/export2.png" width="500" />
 
 ## More on data
 
